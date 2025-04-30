@@ -30,11 +30,11 @@ export type J40Properties = { [key: string]: any };
 export const MISSING_DATA_STRING = "--";
 
 // Tribal signals
-export const TRIBAL_ID = "tribalId";
+export const TRIBAL_ID = "";
 export const LAND_AREA_NAME = "landAreaName";
-export const TRIBAL_AREAS_PERCENTAGE = "TA_PERC_FE";
-export const TRIBAL_AREAS_COUNT_AK = "TA_COUNT_AK";
-export const TRIBAL_AREAS_COUNT_CONUS = "TA_COUNT_C";
+export const TRIBAL_AREAS_PERCENTAGE = "";
+export const TRIBAL_AREAS_COUNT_AK = "";
+export const TRIBAL_AREAS_COUNT_CONUS = "";
 
 // Set the threshold percentile used by most indicators in the side panel
 export const DEFAULT_THRESHOLD_PERCENTILE = 90;
@@ -79,7 +79,7 @@ export const TOTAL_NUMBER_OF_DISADVANTAGE_INDICATORS = "TC";
 export const TOTAL_NUMBER_OF_INDICATORS = "THRHLD";
 export const COUNT_OF_CATEGORIES_DISADV = "CC";
 export const SCORE_N_COMMUNITIES = "SN_C";
-export const SCORE_N_TRIBAL = "SN_T";
+export const SCORE_N_TRIBAL = "";
 export const IS_GRANDFATHERED = "SN_GRAND";
 
 export const SIDE_PANEL_STATE = "UI_EXP";
@@ -264,11 +264,11 @@ export const PSIM_BURDEN_LOW_ZOOM_SOURCE_NAME =
   "psim-burden-low-zoom-source-name";
 export const ADD_HIGH_ZOOM_SOURCE_NAME = "add-high-zoom-source-name";
 export const ADD_LOW_ZOOM_SOURCE_NAME = "add-low-zoom-source-name";
-export const TRIBAL_SOURCE_NAME = "tribal-source-name";
+// export const TRIBAL_SOURCE_NAME = "tribal-source-name";
 
 // Layer ID constants
 export const SCORE_SOURCE_LAYER = "blocks"; // The name of the layer within the tiles that contains the score
-export const TRIBAL_SOURCE_LAYER = "blocks";
+export const TRIBAL_SOURCE_LAYER = "";
 export const BASE_MAP_LAYER_ID = "base-map-layer-id";
 export const HIGH_ZOOM_LAYER_ID = "high-zoom-layer-id";
 export const PRIORITIZED_HIGH_ZOOM_LAYER_ID = "prioritized-high-zoom-layer-id";
@@ -291,9 +291,9 @@ export const ADD_BURDEN_HIGH_LAYER_ID = "add-burden-high-layer-id";
 
 export const ADD_INDICATOR_LAYER_ID = "add-indicator-layer-id";
 
-export const TRIBAL_LAYER_ID = "tribal-layer-id";
-export const TRIBAL_ALASKA_POINTS_LAYER_ID = "tribal-alaska-points-layer-id";
-export const TRIBAL_LABELS_LAYER_ID = "tribal-labels-layer-id";
+export const TRIBAL_LAYER_ID = "";
+export const TRIBAL_ALASKA_POINTS_LAYER_ID = "";
+export const TRIBAL_LABELS_LAYER_ID = "";
 
 // Used in layer filters:
 export const SCORE_PROPERTY_LOW = "SCORE";
@@ -435,7 +435,7 @@ export const MAP_TRACT_SEARCH_PATH =
     process.env.GATSBY_DATA_PIPELINE_SEARCH_PATH_LOCAL :
     process.env.GATSBY_2_0_MAP_TRACT_SEARCH_PATH;
 
-export const GATSBY_DATA_PIPELINE_TRIBAL_PATH =
-  process.env.DATA_SOURCE === "local" ?
-    process.env.GATSBY_DATA_PIPELINE_TRIBAL_PATH_LOCAL :
-    process.env.GATSBY_2_0_TRIBAL_PATH;
+// export const GATSBY_DATA_PIPELINE_TRIBAL_PATH =
+//   process.env.DATA_SOURCE === "local" ?
+//     process.env.GATSBY_DATA_PIPELINE_TRIBAL_PATH_LOCAL :
+//     process.env.GATSBY_2_0_TRIBAL_PATH;
