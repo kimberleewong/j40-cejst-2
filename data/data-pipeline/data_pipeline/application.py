@@ -9,8 +9,10 @@ from data_pipeline.config import settings
 from data_pipeline.etl.runner import etl_runner
 from data_pipeline.etl.runner import score_generate
 from data_pipeline.etl.runner import score_geo
-from data_pipeline.etl.runner import score_geo_gistar
-from data_pipeline.etl.runner import score_geo_add
+from data_pipeline.etl.runner import score_geo_gistar_burd
+from data_pipeline.etl.runner import score_geo_gistar_ind
+from data_pipeline.etl.runner import score_geo_add_burd
+from data_pipeline.etl.runner import score_geo_add_ind
 from data_pipeline.etl.runner import score_post
 from data_pipeline.etl.runner import get_data_sources
 from data_pipeline.etl.runner import extract_data_sources as extract_ds
@@ -24,8 +26,10 @@ from data_pipeline.etl.sources.tribal.etl_utils import (
     reset_data_directories as tribal_reset,
 )
 from data_pipeline.tile.generate import generate_tiles
-from data_pipeline.tile.generate_gistar import generate_tiles_gistar
-from data_pipeline.tile.generate_add import generate_tiles_add
+from data_pipeline.tile.generate_gistar_burd import generate_tiles_gistar_burd
+from data_pipeline.tile.generate_gistar_ind import generate_tiles_gistar_ind
+from data_pipeline.tile.generate_add_burd import generate_tiles_add_burd
+from data_pipeline.tile.generate_add_ind import generate_tiles_add_ind
 
 from data_pipeline.etl.score import constants
 from data_pipeline.utils import check_first_run
@@ -266,9 +270,9 @@ def geo_score(data_source: str):
 
     log_goodbye()
 
-@cli.command(help="Generate GeoJSON files with GI Star scores baked in")
+@cli.command(help="Generate GeoJSON files with GI Star Burden scores baked in")
 @data_source_option
-def geo_score_gistar(data_source: str):
+def geo_score_gistar_burd(data_source: str):
     """CLI command to combine score with GeoJSON data and generate low and high files
 
     Args:
@@ -289,13 +293,40 @@ def geo_score_gistar(data_source: str):
     geo_score_folder_cleanup()
 
     log_info("Combining score with GeoJSON")
-    score_geo_gistar(data_source=data_source) 
+    score_geo_gistar_burd(data_source=data_source) 
+
+    log_goodbye()
+
+@cli.command(help="Generate GeoJSON files with GI Star Indicator scores baked in")
+@data_source_option
+def geo_score_gistar_ind(data_source: str):
+    """CLI command to combine score with GeoJSON data and generate low and high files
+
+    Args:
+        data_source (str): Source for the census data (optional)
+                           Options:
+                           - local: fetch census and score data from the local data directory
+                           - aws: fetch census and score from AWS S3 J40 data repository
+
+    Returns:
+        None
+    """
+    log_title(
+        "Generate GeoJSON",
+        "Combine Score and GeoJSON, Add Shapefile Data to Codebook",
+    )
+
+    log_info("Cleaning up geo score folder")
+    geo_score_folder_cleanup()
+
+    log_info("Combining score with GeoJSON")
+    score_geo_gistar_ind(data_source=data_source) 
 
     log_goodbye()
 
 @cli.command(help="Generate GeoJSON files with Additive scores baked in")
 @data_source_option
-def geo_score_add(data_source: str):
+def geo_score_add_burd(data_source: str):
     """CLI command to combine score with GeoJSON data and generate low and high files
 
     Args:
@@ -316,7 +347,34 @@ def geo_score_add(data_source: str):
     geo_score_folder_cleanup()
 
     log_info("Combining score with GeoJSON")
-    score_geo_add(data_source=data_source)
+    score_geo_add_burd(data_source=data_source)
+
+    log_goodbye()
+
+@cli.command(help="Generate GeoJSON files with Additive scores baked in")
+@data_source_option
+def geo_score_add_ind(data_source: str):
+    """CLI command to combine score with GeoJSON data and generate low and high files
+
+    Args:
+        data_source (str): Source for the census data (optional)
+                           Options:
+                           - local: fetch census and score data from the local data directory
+                           - aws: fetch census and score from AWS S3 J40 data repository
+
+    Returns:
+        None
+    """
+    log_title(
+        "Generate GeoJSON",
+        "Combine Score and GeoJSON, Add Shapefile Data to Codebook",
+    )
+
+    log_info("Cleaning up geo score folder")
+    geo_score_folder_cleanup()
+
+    log_info("Combining score with GeoJSON")
+    score_geo_add_ind(data_source=data_source)
 
     log_goodbye()
 
@@ -344,7 +402,7 @@ def generate_map_tiles(generate_tribal_layer):
     log_goodbye()
 
 @cli.command(
-    help="Generate GI Star map tiles. Pass -t to generate tribal layer as well.",
+    help="Generate GI Star burden map tiles. Pass -t to generate tribal layer as well.",
 )
 @click.option(
     "-t",
@@ -354,20 +412,42 @@ def generate_map_tiles(generate_tribal_layer):
     is_flag=True,
     type=bool,
 )
-def generate_map_tiles_gistar(generate_tribal_layer):
+def generate_map_tiles_gistar_burd(generate_tribal_layer):
     """CLI command to generate the map tiles"""
-    log_title("Generate GI Star Map Tiles")
+    log_title("Generate GI Star Burden Map Tiles")
 
     data_path = settings.APP_ROOT / "data"
 
     log_info("Generating Gi Star tiles")
-    generate_tiles_gistar(data_path, generate_tribal_layer)
+    generate_tiles_gistar_burd(data_path, generate_tribal_layer)
+
+    log_goodbye()
+
+@cli.command(
+    help="Generate GI Star Indicator map tiles. Pass -t to generate tribal layer as well.",
+)
+@click.option(
+    "-t",
+    "--generate-tribal-layer",
+    default=False,
+    required=False,
+    is_flag=True,
+    type=bool,
+)
+def generate_map_tiles_gistar_ind(generate_tribal_layer):
+    """CLI command to generate the map tiles"""
+    log_title("Generate GI Star Indicator Map Tiles")
+
+    data_path = settings.APP_ROOT / "data"
+
+    log_info("Generating Gi Star tiles")
+    generate_tiles_gistar_ind(data_path, generate_tribal_layer)
 
     log_goodbye()
 
 
 @cli.command(
-    help="Generate add map tiles. Pass -t to generate tribal layer as well.",
+    help="Generate add burden map tiles. Pass -t to generate tribal layer as well.",
 )
 @click.option(
     "-t",
@@ -379,12 +459,34 @@ def generate_map_tiles_gistar(generate_tribal_layer):
 )
 def generate_map_tiles_add(generate_tribal_layer):
     """CLI command to generate the map tiles"""
-    log_title("Generate Additive Map Tiles")
+    log_title("Generate Additive Burden Map Tiles")
 
     data_path = settings.APP_ROOT / "data"
 
     log_info("Generating Additive tiles")
-    generate_tiles_add(data_path, generate_tribal_layer)
+    generate_tiles_add_burd(data_path, generate_tribal_layer)
+
+    log_goodbye()
+
+@cli.command(
+    help="Generate additive indicator map tiles. Pass -t to generate tribal layer as well.",
+)
+@click.option(
+    "-t",
+    "--generate-tribal-layer",
+    default=False,
+    required=False,
+    is_flag=True,
+    type=bool,
+)
+def generate_map_tiles_add_ind(generate_tribal_layer):
+    """CLI command to generate the map tiles"""
+    log_title("Generate Additive Map Tiles")
+
+    data_path = settings.APP_ROOT / "data"
+
+    log_info("Generating Additive Indicator tiles")
+    generate_tiles_add_ind(data_path, generate_tribal_layer)
 
     log_goodbye()
 

@@ -105,6 +105,9 @@ Started adding the GI Star layer in `client/src/components/MapTractLayers/MapTra
 
 - `client/src/components/J40Map.tsx`: Added high zoom new layer IDs near the bottom of this doc to try and make new layers interactive. 
 
+- `client/src/components/mapInfoPanel.tsx` is the parent container that controls which side panel is displayed. Right now, there are two options. Either the default `client/src/components/SidePanelInfo/SidePanelInfo.tsx` that shows up on load, or the `client/src/components/AreaDetail/AreaDetail.tsx` that shows up when you click on a tract. Planning to add a new sidepanel component and then add it to the layer selection options.
+  
+
 ## Poetry
 
 Run poetry install to install dependencies. Poetry is a dependency management tool for Python. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.

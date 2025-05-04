@@ -16,16 +16,16 @@ from data_pipeline.etl.datasource import DataSource
 logger = get_module_logger(__name__)
 
 
-class GeoScoreGIStarETL(ExtractTransformLoad):
+class GeoScoreGIStarBurdETL(ExtractTransformLoad):
     """
     A class used to generate per state and national GeoJson files with the score baked in
     """
 
     def __init__(self, data_source: str = None):
         self.DATA_SOURCE = data_source
-        self.SCORE_GEOJSON_PATH = self.DATA_PATH / "score" / "geojson" / "gistar"
-        self.SCORE_LOW_GEOJSON = self.SCORE_GEOJSON_PATH / "usa-low-gistar.json"
-        self.SCORE_HIGH_GEOJSON = self.SCORE_GEOJSON_PATH / "usa-high-gistar.json"
+        self.SCORE_GEOJSON_PATH = self.DATA_PATH / "score" / "geojson" / "gistar" / "burd"
+        self.SCORE_LOW_GEOJSON = self.SCORE_GEOJSON_PATH / "usa-low-gistar-burd.json"
+        self.SCORE_HIGH_GEOJSON = self.SCORE_GEOJSON_PATH / "usa-high-gistar-burd.json"
         
         logger.debug(f"SCORE_GEOJSON_PATH: {self.SCORE_GEOJSON_PATH}")
         logger.debug(f"SCORE_HIGH_GEOJSON: {self.SCORE_HIGH_GEOJSON}")
@@ -353,7 +353,7 @@ class GeoScoreGIStarETL(ExtractTransformLoad):
                 filename=self.SCORE_HIGH_GEOJSON,
                 driver="GeoJSON",
             )
-            logger.info("Completed writing usa-high-gistar")
+            logger.info("Completed writing usa-high-gistar-burd")
 
          
         def write_low_to_file():
@@ -361,7 +361,7 @@ class GeoScoreGIStarETL(ExtractTransformLoad):
             self.geojson_score_usa_low.to_file(
                 filename=self.SCORE_LOW_GEOJSON, driver="GeoJSON"
             )
-            logger.info("Completed writing usa-low-gistar")
+            logger.info("Completed writing usa-low-gistar-burd")
         
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = {

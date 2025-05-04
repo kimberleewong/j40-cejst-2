@@ -30,7 +30,6 @@ interface IMapTractLayers {
 
 export const featureURLForTilesetName = (
     tilesetType: string,
-    // tilesetSubtype: string,
     tilesetName: string,
 ): string => {
   const flags = useFlags();
@@ -56,7 +55,6 @@ export const featureURLForTilesetName = (
       featureTilePath,
       mapTilesPath,
       tilesetType,
-      // tilesetSubtype,
       tilesetName,
       XYZ_SUFFIX,
     ]
@@ -84,6 +82,7 @@ export const featureURLForTilesetName = (
 
 const MapTractLayers = ({
   selectedFeatureId,
+  selectedFeature,
   visibleLayer,
   setVisibleLayer,
   setInteractiveLayerIds,
@@ -99,33 +98,28 @@ const MapTractLayers = ({
     setInteractiveLayerIds(initialInteractiveLayerIds);
   }, [visibleLayer, setInteractiveLayerIds, getInteractiveLayerIds]);
 
-  // const filter = useMemo(() => {
-  //   if (!selectedFeatureId) {
-  //     return null;
-  //   }
-  //   return ['in', constants.GEOID_PROPERTY, selectedFeatureId];
-  // }, [selectedFeatureId]);
-
   const filter = useMemo(
       () => ['in', constants.GEOID_PROPERTY, selectedFeatureId],
       [selectedFeatureId],
   );
 
+  const layers = [
+    {id: constants.ADD_BURDEN_LAYER_ID, name: 'Additive Burdens'},
+    {id: constants.PSIM_BURDEN_LAYER_ID, name: 'GI Star Burdens'},
+    {id: constants.LEGACY_LAYER_ID, name: 'Legacy Layer'},
+  ];
+  const setLayerState = (layerId: string, interactiveLayerIds: string[]) => {
+    setVisibleLayer(layerId); // Update the visible layer
+    setInteractiveLayerIds(interactiveLayerIds); // Update the interactive layer IDs
+  };
+
   return (
     <>
+      {/* Add the LayerToggleControl */}
       <LayerToggleControl
-        layers={[
-          {id: constants.ADD_BURDEN_LAYER_ID, name: 'Total Burdens'},
-          {id: constants.ADD_INDICATOR_LAYER_ID, name: 'Total Indicators'},
-          {id: constants.PSIM_BURDEN_LAYER_ID, name: 'Burden Hotspots'},
-          {id: constants.PSIM_INDICATOR_LAYER_ID, name: 'Indicator Hotspots'},
-          {id: constants.LEGACY_LAYER_ID, name: 'Legacy Tool'},
-        ]}
+        layers={layers}
         visibleLayer={visibleLayer}
-        setLayerState={(layerId, interactiveLayerIds) => {
-          setVisibleLayer(layerId);
-          setInteractiveLayerIds(interactiveLayerIds);
-        }}
+        setLayerState={setLayerState}
       />
 
       {/* Sources and Layers */}
@@ -136,7 +130,7 @@ const MapTractLayers = ({
             id={constants.LOW_ZOOM_SOURCE_NAME}
             type="vector"
             promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('default/legacy', 'low')]}
+            tiles={[featureURLForTilesetName('default', 'low')]}
             maxzoom={constants.GLOBAL_MAX_ZOOM_LOW}
             minzoom={constants.GLOBAL_MIN_ZOOM_LOW}
           >
@@ -164,7 +158,7 @@ const MapTractLayers = ({
             id={constants.HIGH_ZOOM_SOURCE_NAME}
             type="vector"
             promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('default/legacy', 'high')]}
+            tiles={[featureURLForTilesetName('default', 'high')]}
             maxzoom={constants.GLOBAL_MAX_ZOOM_HIGH}
             minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
           >
@@ -238,12 +232,12 @@ const MapTractLayers = ({
 
       {visibleLayer === constants.PSIM_BURDEN_LAYER_ID && (
         <>
-          {/* GI Star burden Low */}
+          {/* GI Star Low */}
           <Source
             id={constants.PSIM_BURDEN_LOW_ZOOM_SOURCE_NAME}
             type="vector"
             promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('gistar/burd', 'low')]}
+            tiles={[featureURLForTilesetName('gistar', 'low')]}
             maxzoom={constants.GLOBAL_MAX_ZOOM_LOW}
             minzoom={constants.GLOBAL_MIN_ZOOM_LOW}
           >
@@ -274,23 +268,18 @@ const MapTractLayers = ({
             />
           </Source>
 
-          {/* GI Star Burden High */}
+          {/* GI Star High */}
           <Source
             id={constants.PSIM_BURDEN_HIGH_ZOOM_SOURCE_NAME}
             type="vector"
             promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('gistar/burd', 'high')]}
+            tiles={[featureURLForTilesetName('gistar', 'high')]}
             maxzoom={constants.GLOBAL_MAX_ZOOM_HIGH}
             minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
           >
             <Layer
               id={constants.PSIM_BURDEN_HIGH_LAYER_ID}
               source-layer={constants.SCORE_SOURCE_LAYER}
-              filter={[
-                '>',
-                constants.TOTAL_POPULATION,
-                constants.PSIM_POP_THRESHOLD,
-              ]}
               type="fill"
               paint={{
                 'fill-color': [
@@ -312,24 +301,8 @@ const MapTractLayers = ({
               }}
               minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
             />
-
-            {/* High zoom layer (static) - controls the border between features */}
             <Layer
-              id={constants.FEATURE_BORDER_LAYER_ID}
-              source-layer={constants.SCORE_SOURCE_LAYER}
-              type="line"
-              paint={{
-                'line-color': constants.PSIM_FEATURE_BORDER_COLOR,
-                'line-width': constants.FEATURE_BORDER_WIDTH,
-                'line-opacity': constants.FEATURE_BORDER_OPACITY,
-              }}
-              maxzoom={constants.GLOBAL_MAX_ZOOM_FEATURE_BORDER}
-              minzoom={constants.GLOBAL_MIN_ZOOM_FEATURE_BORDER}
-            />
-
-            {/* High zoom layer (dynamic) - controls the border of selected features */}
-            <Layer
-              id={constants.PSIM_BURD_SELECTED_FEATURE_BORDER_LAYER_ID}
+              id={constants.PSIM_SELECTED_FEATURE_BORDER_LAYER_ID}
               source-layer={constants.SCORE_SOURCE_LAYER}
               filter={filter} // This filter filters out all other features except the selected feature.
               type="line"
@@ -342,106 +315,14 @@ const MapTractLayers = ({
           </Source>
         </>
       )}
-
-      {visibleLayer === constants.PSIM_INDICATOR_LAYER_ID && (
-        <>
-          {/* GI Star IND Low */}
-          <Source
-            id={constants.PSIM_INDICATOR_LOW_ZOOM_SOURCE_NAME}
-            type="vector"
-            promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('gistar/ind', 'low')]}
-            maxzoom={constants.GLOBAL_MAX_ZOOM_LOW}
-            minzoom={constants.GLOBAL_MIN_ZOOM_LOW}
-          >
-            <Layer
-              id={constants.PSIM_INDICATOR_LOW_LAYER_ID}
-              source-layer={constants.SCORE_SOURCE_LAYER}
-              type="fill"
-              paint={{
-                'fill-color': [
-                  'step',
-                  ['get', constants.PSIM_INDICATOR],
-                  constants.PSIM_DEFAULT_COLOR,
-                  -0.05,
-                  constants.PSIM_COLD_COLOR,
-                  -0.01,
-                  constants.PSIM_VERY_COLD_COLOR,
-                  -1e-12,
-                  constants.PSIM_HOT_COLOR,
-                  0.01,
-                  constants.PSIM_VERY_HOT_COLOR,
-                  0.05,
-                  constants.PSIM_NA_COLOR,
-                ],
-                'fill-opacity': constants.LOW_ZOOM_PSIM_FEATURE_FILL_OPACITY,
-              }}
-              maxzoom={constants.GLOBAL_MAX_ZOOM_LOW}
-              minzoom={constants.GLOBAL_MIN_ZOOM_LOW}
-            />
-          </Source>
-
-          {/* GI Star High IND */}
-          <Source
-            id={constants.PSIM_INDICATOR_HIGH_ZOOM_SOURCE_NAME}
-            type="vector"
-            promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('gistar/ind', 'high')]}
-            maxzoom={constants.GLOBAL_MAX_ZOOM_HIGH}
-            minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
-          >
-            <Layer
-              id={constants.PSIM_INDICATOR_HIGH_LAYER_ID}
-              source-layer={constants.SCORE_SOURCE_LAYER}
-              filter={[
-                '>',
-                constants.TOTAL_POPULATION,
-                constants.PSIM_POP_THRESHOLD,
-              ]}
-              type="fill"
-              paint={{
-                'fill-color': [
-                  'step',
-                  ['get', constants.PSIM_INDICATOR],
-                  constants.PSIM_DEFAULT_COLOR,
-                  -0.05,
-                  constants.PSIM_COLD_COLOR,
-                  -0.01,
-                  constants.PSIM_VERY_COLD_COLOR,
-                  -1e-12,
-                  constants.PSIM_HOT_COLOR,
-                  0.01,
-                  constants.PSIM_VERY_HOT_COLOR,
-                  0.05,
-                  constants.PSIM_NA_COLOR,
-                ],
-                'fill-opacity': constants.HIGH_ZOOM_PSIM_FEATURE_FILL_OPACITY,
-              }}
-              minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
-            />
-            <Layer
-              id={constants.PSIM_IND_SELECTED_FEATURE_BORDER_LAYER_ID}
-              source-layer={constants.SCORE_SOURCE_LAYER}
-              filter={filter} // This filter filters out all other features except the selected feature.
-              type="line"
-              paint={{
-                'line-color': constants.PSIM_SELECTED_FEATURE_BORDER_COLOR,
-                'line-width': constants.SELECTED_FEATURE_BORDER_WIDTH,
-              }}
-              minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
-            />
-          </Source>
-        </>
-      )}
-
       {visibleLayer === constants.ADD_BURDEN_LAYER_ID && (
         <>
-          {/* Additive BURD Low */}
+          {/* Additive Low */}
           <Source
-            id={constants.ADD_BURD_LOW_ZOOM_SOURCE_NAME}
+            id={constants.ADD_LOW_ZOOM_SOURCE_NAME}
             type="vector"
             promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('add/burd', 'low')]}
+            tiles={[featureURLForTilesetName('add', 'low')]}
             maxzoom={constants.GLOBAL_MAX_ZOOM_LOW}
             minzoom={constants.GLOBAL_MIN_ZOOM_LOW}
           >
@@ -480,10 +361,10 @@ const MapTractLayers = ({
 
           {/* Additive High */}
           <Source
-            id={constants.ADD_BURD_HIGH_ZOOM_SOURCE_NAME}
+            id={constants.ADD_HIGH_ZOOM_SOURCE_NAME}
             type="vector"
             promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('add/burd', 'high')]}
+            tiles={[featureURLForTilesetName('add', 'high')]}
             maxzoom={constants.GLOBAL_MAX_ZOOM_HIGH}
             minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
           >
@@ -517,123 +398,9 @@ const MapTractLayers = ({
               }}
               minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
             />
-
-            {/* High zoom layer (static) - controls the border between features */}
-            <Layer
-              id={constants.FEATURE_BORDER_LAYER_ID}
-              source-layer={constants.SCORE_SOURCE_LAYER}
-              type="line"
-              paint={{
-                'line-color': constants.ADD_FEATURE_BORDER_COLOR,
-                'line-width': constants.FEATURE_BORDER_WIDTH,
-                'line-opacity': constants.FEATURE_BORDER_OPACITY,
-              }}
-              maxzoom={constants.GLOBAL_MAX_ZOOM_FEATURE_BORDER}
-              minzoom={constants.GLOBAL_MIN_ZOOM_FEATURE_BORDER}
-            />
-
             {/* High zoom ADDITIVE layer (dynamic) - border styling around the selected feature */}
             <Layer
-              id={constants.ADD_BURD_SELECTED_FEATURE_BORDER_LAYER_ID}
-              source-layer={constants.SCORE_SOURCE_LAYER}
-              filter={filter} // This filter filters out all other features except the selected feature.
-              type="line"
-              paint={{
-                'line-color': constants.ADD_SELECTED_FEATURE_BORDER_COLOR,
-                'line-width': constants.SELECTED_FEATURE_BORDER_WIDTH,
-              }}
-              minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
-            />
-          </Source>
-        </>
-      )}
-
-      {visibleLayer === constants.ADD_INDICATOR_LAYER_ID && (
-        <>
-          {/* Additive IND Low */}
-          <Source
-            id={constants.ADD_IND_LOW_ZOOM_SOURCE_NAME}
-            type="vector"
-            promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('add/ind', 'low')]}
-            maxzoom={constants.GLOBAL_MAX_ZOOM_LOW}
-            minzoom={constants.GLOBAL_MIN_ZOOM_LOW}
-          >
-            <Layer
-              id={constants.ADD_INDICATOR_LOW_LAYER_ID}
-              source-layer={constants.SCORE_SOURCE_LAYER}
-              type="fill"
-              paint={{
-                'fill-color': [
-                  'interpolate',
-                  ['linear'],
-                  ['get', constants.ADD_IND],
-                  0,
-                  constants.ADD_0_COLOR,
-                  2,
-                  constants.ADD_1_COLOR,
-                  4,
-                  constants.ADD_2_COLOR,
-                  6,
-                  constants.ADD_3_COLOR,
-                  8,
-                  constants.ADD_4_COLOR,
-                  10,
-                  constants.ADD_5_COLOR,
-                  12,
-                  constants.ADD_6_COLOR,
-                  14,
-                  constants.ADD_7_COLOR,
-                ],
-                'fill-opacity': constants.LOW_ZOOM_PSIM_FEATURE_FILL_OPACITY,
-              }}
-              maxzoom={constants.GLOBAL_MAX_ZOOM_LOW}
-              minzoom={constants.GLOBAL_MIN_ZOOM_LOW}
-            />
-          </Source>
-
-          {/* Additive High */}
-          <Source
-            id={constants.ADD_IND_HIGH_ZOOM_SOURCE_NAME}
-            type="vector"
-            promoteId={constants.GEOID_PROPERTY}
-            tiles={[featureURLForTilesetName('add/ind', 'high')]}
-            maxzoom={constants.GLOBAL_MAX_ZOOM_HIGH}
-            minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
-          >
-            <Layer
-              id={constants.ADD_INDICATOR_HIGH_LAYER_ID}
-              source-layer={constants.SCORE_SOURCE_LAYER}
-              type="fill"
-              paint={{
-                'fill-color': [
-                  'interpolate',
-                  ['linear'],
-                  ['get', constants.ADD_IND],
-                  0,
-                  constants.ADD_0_COLOR,
-                  2,
-                  constants.ADD_1_COLOR,
-                  4,
-                  constants.ADD_2_COLOR,
-                  6,
-                  constants.ADD_3_COLOR,
-                  8,
-                  constants.ADD_4_COLOR,
-                  10,
-                  constants.ADD_5_COLOR,
-                  12,
-                  constants.ADD_6_COLOR,
-                  14,
-                  constants.ADD_7_COLOR,
-                ],
-                'fill-opacity': constants.HIGH_ZOOM_PSIM_FEATURE_FILL_OPACITY,
-              }}
-              minzoom={constants.GLOBAL_MIN_ZOOM_HIGH}
-            />
-            {/* High zoom ADDITIVE layer (dynamic) - border styling around the selected feature */}
-            <Layer
-              id={constants.ADD_IND_SELECTED_FEATURE_BORDER_LAYER_ID}
+              id={constants.SELECTED_FEATURE_BORDER_LAYER_ID}
               source-layer={constants.SCORE_SOURCE_LAYER}
               filter={filter} // This filter filters out all other features except the selected feature.
               type="line"

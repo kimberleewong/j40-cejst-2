@@ -1,7 +1,7 @@
 /* eslint-disable valid-jsdoc */
 /* eslint-disable no-unused-vars */
 // External Libs:
-import React, {useMemo, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Map, MapGeoJSONFeature, LngLatBoundsLike} from 'maplibre-gl';
 import ReactMapGL, {
   MapEvent,
@@ -125,7 +125,6 @@ const J40Map = ({location}: IJ40Interface) => {
   const intl = useIntl();
 
   const selectedFeatureId = (selectedFeature && selectedFeature.id) || '';
-
   const zoomLatLngHash = mapRef.current?.getMap()._hash._getCurrentHash();
 
   /**
@@ -138,7 +137,7 @@ const J40Map = ({location}: IJ40Interface) => {
       const [minLng, minLat, maxLng, maxLat] = bbox(feature);
 
       // Set the selectedFeature ID
-      setSelectedFeature(feature);
+      setSelectedFeature(feature as MapGeoJSONFeature);
 
       // Go to the newly selected feature (as long as it's not an Alaska Point)
       goToPlace([
@@ -425,9 +424,17 @@ const J40Map = ({location}: IJ40Interface) => {
           {/*
             /* Tribal layer is baked into Mapbox source,
              * only render here if we're not using that
+<<<<<<< HEAD
             process.env.MAPBOX_STYLES_READ_TOKEN || <MapTribalLayer /> */}
+=======
+             **/
+            // process.env.MAPBOX_STYLES_READ_TOKEN || <MapTribalLayer />
+          }
+>>>>>>> 707792eb7c0fe5ac8a4a43e842db973e154d2181
 
           <MapTractLayers
+            selectedFeatureId={selectedFeature?.id || ''} // Pass the selected feature ID
+            selectedFeature={selectedFeature}
             visibleLayer={visibleLayer}
             setVisibleLayer={setVisibleLayer}
             setInteractiveLayerIds={setInteractiveLayerIds}
@@ -470,6 +477,7 @@ const J40Map = ({location}: IJ40Interface) => {
                 showUserHeading={
                   windowWidth < constants.USWDS_BREAKPOINTS.MOBILE_LG
                 }
+                // Copolit said we should remove this entirely because it's not valid
                 disabledLabel={intl.formatMessage(
                     EXPLORE_COPY.MAP.GEOLOC_MSG_DISABLED,
                 )}
@@ -524,6 +532,7 @@ const J40Map = ({location}: IJ40Interface) => {
           featureProperties={detailViewData?.properties}
           selectedFeatureId={selectedFeature?.id}
           hash={zoomLatLngHash}
+          visibleLayer={visibleLayer} // Pass the visibleLayer state
         />
       </Grid>
     </>

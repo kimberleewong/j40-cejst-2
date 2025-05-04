@@ -16,16 +16,16 @@ from data_pipeline.etl.datasource import DataSource
 logger = get_module_logger(__name__)
 
 
-class GeoScoreAddETL(ExtractTransformLoad):
+class GeoScoreAddBurdETL(ExtractTransformLoad):
     """
     A class used to generate per state and national GeoJson files with the score baked in
     """
 
     def __init__(self, data_source: str = None):
         self.DATA_SOURCE = data_source
-        self.SCORE_GEOJSON_PATH = self.DATA_PATH / "score" / "geojson" / "add"
-        self.SCORE_LOW_GEOJSON = self.SCORE_GEOJSON_PATH / "usa-low-add.json"
-        self.SCORE_HIGH_GEOJSON = self.SCORE_GEOJSON_PATH / "usa-high-add.json"
+        self.SCORE_GEOJSON_PATH = self.DATA_PATH / "score" / "geojson" / "add" / "burd"
+        self.SCORE_LOW_GEOJSON = self.SCORE_GEOJSON_PATH / "usa-low-add-burd.json"
+        self.SCORE_HIGH_GEOJSON = self.SCORE_GEOJSON_PATH / "usa-high-add-burd.json"
 
         self.SCORE_CSV_PATH = self.DATA_PATH / "score" / "csv"
         self.TILE_SCORE_CSV = self.SCORE_CSV_PATH / "tiles" / "usa.csv"
@@ -347,14 +347,14 @@ class GeoScoreAddETL(ExtractTransformLoad):
                 filename=self.SCORE_HIGH_GEOJSON,
                 driver="GeoJSON",
             )
-            logger.info("Completed writing usa-high-add")
+            logger.info("Completed writing usa-high-add-burd")
 
         def write_low_to_file():
             logger.info("Writing usa-low (~9 minutes)")
             self.geojson_score_usa_low.to_file(
                 filename=self.SCORE_LOW_GEOJSON, driver="GeoJSON"
             )
-            logger.info("Completed writing usa-low-add")
+            logger.info("Completed writing usa-low-add-burd")
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = {

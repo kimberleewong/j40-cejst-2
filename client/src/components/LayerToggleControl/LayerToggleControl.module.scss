@@ -1,27 +1,27 @@
 @use '../../styles/design-system.scss' as *;
 
-// .layerSelectorContainer {
-//     background-color: white;
-//     @include u-padding-left(1);
-//     @include u-padding-right(1);
-//     @include u-padding-top(1);
-//     @include u-padding-bottom(1);
-//     width: fit-content;
-//     z-index: 1;
+.layerToggleContainer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
-//     h4 {
-//         margin-top: 0 !important;
-//     }
-    
-//     // styles for mobile-lg (480px) and greater widths,
-//     @include at-media('mobile-lg') {
-//     //    @include u-margin-top(3);
-//        @include u-margin-right(1);       
-//     }
-// }
+    // styles for mobile-lg (480px) and greater widths,
+    @media (max-width: 685px) {
+        top: auto;
+        bottom: 10px;
+        right: 10px; 
+        // width: calc(100% - 20px); // Make it full-width with some padding
+        z-index: 10;
+    }
+}
 
 .noMarginTop {
     margin-top: 0px !important;
+    margin-bottom: 5px !important;
 }
 
 .label {

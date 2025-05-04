@@ -23,6 +23,7 @@ services:
     build: data/data-serve/.
     volumes:
       - ./data/data-pipeline/data_pipeline/data/score:/data/data-pipeline/data_pipeline/data/score
+      - ./data/data-pipeline/data_pipeline/data-versions:/data/data-pipeline/data-versions
       # - ./data/data-pipeline/data_pipeline/data/tribal:/data/data-pipeline/data_pipeline/data/tribal
     ports:
       - 3005:8080

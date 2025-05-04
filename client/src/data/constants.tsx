@@ -73,6 +73,7 @@ export const DEMO_AGE_OVER_64 = "AGE_OLD";
  * the tract will be considered disadvantaged.
  */
 export const SCORE_BOUNDARY_THRESHOLD = 0.6;
+export const PSIM_POP_THRESHOLD = 100;
 
 // Determines the X of Y threshold exceeded
 export const TOTAL_NUMBER_OF_DISADVANTAGE_INDICATORS = "TC";
@@ -258,13 +259,28 @@ export const IMPUTE_FLAG = "IMP_FLG";
 export const BASE_MAP_SOURCE_NAME = "base-map-source-name";
 export const HIGH_ZOOM_SOURCE_NAME = "high-zoom-source-name";
 export const LOW_ZOOM_SOURCE_NAME = "low-zoom-source-name";
+
 export const PSIM_BURDEN_HIGH_ZOOM_SOURCE_NAME =
   "psim-burden-high-zoom-source-name";
 export const PSIM_BURDEN_LOW_ZOOM_SOURCE_NAME =
   "psim-burden-low-zoom-source-name";
+<<<<<<< HEAD
 export const ADD_HIGH_ZOOM_SOURCE_NAME = "add-high-zoom-source-name";
 export const ADD_LOW_ZOOM_SOURCE_NAME = "add-low-zoom-source-name";
 // export const TRIBAL_SOURCE_NAME = "tribal-source-name";
+=======
+export const PSIM_INDICATOR_HIGH_ZOOM_SOURCE_NAME =
+  "psim-indicator-high-zoom-source-name";
+export const PSIM_INDICATOR_LOW_ZOOM_SOURCE_NAME =
+  "psim-indicator-low-zoom-source-name";
+
+export const ADD_BURD_HIGH_ZOOM_SOURCE_NAME = "add-burd-high-zoom-source-name";
+export const ADD_BURD_LOW_ZOOM_SOURCE_NAME = "add-burd-low-zoom-source-name";
+export const ADD_IND_HIGH_ZOOM_SOURCE_NAME = "add-ind-high-zoom-source-name";
+export const ADD_IND_LOW_ZOOM_SOURCE_NAME = "add-ind-low-zoom-source-name";
+
+export const TRIBAL_SOURCE_NAME = "tribal-source-name";
+>>>>>>> 707792eb7c0fe5ac8a4a43e842db973e154d2181
 
 // Layer ID constants
 export const SCORE_SOURCE_LAYER = "blocks"; // The name of the layer within the tiles that contains the score
@@ -278,18 +294,35 @@ export const LOW_ZOOM_LAYER_ID = "low-zoom-layer-id";
 export const FEATURE_BORDER_LAYER_ID = "feature-border-layer-id";
 export const SELECTED_FEATURE_BORDER_LAYER_ID =
   "selected-feature-border-layer-id";
-// Add PSIM burden layer ID
+
+export const PSIM_BURD_SELECTED_FEATURE_BORDER_LAYER_ID =
+  "psim-burd-selected-feature-border-layer-id";
+export const PSIM_IND_SELECTED_FEATURE_BORDER_LAYER_ID =
+  "psim-ind-selected-feature-border-layer-id";
+
+export const ADD_BURD_SELECTED_FEATURE_BORDER_LAYER_ID =
+  "add-burd-selected-feature-border-layer-id";
+export const ADD_IND_SELECTED_FEATURE_BORDER_LAYER_ID =
+  "add-ind-selected-feature-border-layer-id";
+
+// Add new layer IDs
 export const PSIM_BURDEN_LAYER_ID = "psim-burden-layer-id";
 export const PSIM_BURDEN_LOW_LAYER_ID = "psim-burden-low-layer-id";
 export const PSIM_BURDEN_HIGH_LAYER_ID = "psim-burden-high-layer-id";
 
 export const PSIM_INDICATOR_LAYER_ID = "psim-indicator-layer-id";
+export const PSIM_INDICATOR_LOW_LAYER_ID = "psim-indicator-low-layer-id";
+export const PSIM_INDICATOR_HIGH_LAYER_ID = "psim-indicator-high-layer-id";
+
 export const LEGACY_LAYER_ID = "legacy-layer-id";
+
 export const ADD_BURDEN_LAYER_ID = "add-burden-layer-id";
 export const ADD_BURDEN_LOW_LAYER_ID = "add-burden-low-layer-id";
 export const ADD_BURDEN_HIGH_LAYER_ID = "add-burden-high-layer-id";
 
 export const ADD_INDICATOR_LAYER_ID = "add-indicator-layer-id";
+export const ADD_INDICATOR_LOW_LAYER_ID = "add-indicator-low-layer-id";
+export const ADD_INDICATOR_HIGH_LAYER_ID = "add-indicator-high-layer-id";
 
 export const TRIBAL_LAYER_ID = "";
 export const TRIBAL_ALASKA_POINTS_LAYER_ID = "";
@@ -299,6 +332,7 @@ export const TRIBAL_LABELS_LAYER_ID = "";
 export const SCORE_PROPERTY_LOW = "SCORE";
 export const SCORE_PROPERTY_HIGH = "SN_C";
 export const ADD_BURD = "CC";
+export const ADD_IND = "TC";
 
 // Zoom
 export const GLOBAL_MIN_ZOOM = 3;
@@ -324,7 +358,7 @@ export const LOW_ZOOM_PRIORITIZED_FEATURE_FILL_OPACITY = 0.6;
 export const NON_PRIORITIZED_FEATURE_FILL_OPACITY = 0;
 export const TRIBAL_FEATURE_FILL_OPACITY = 0.3;
 export const LOW_ZOOM_PSIM_FEATURE_FILL_OPACITY = 0.7;
-export const HIGH_ZOOM_PSIM_FEATURE_FILL_OPACITY = 0.6;
+export const HIGH_ZOOM_PSIM_FEATURE_FILL_OPACITY = 0.5;
 
 // Colors
 export const FEATURE_BORDER_COLOR = "#4EA5CF";
@@ -338,6 +372,58 @@ export const SELECTED_TRIBAL_BORDER_COLOR = "#1A4480";
 export const TRIBAL_FILL_COLOR = "#768FB3";
 export const TRIBAL_ALASKA_CIRCLE_FILL_COLOR = "#768FB3";
 export const TRIBAL_ALASKA_CIRCLE_RADIUS = 5;
+
+export const PSIM_FEATURE_BORDER_COLOR = "#afafaf";
+export const ADD_FEATURE_BORDER_COLOR = "#95445f";
+
+export const PSIM_SELECTED_FEATURE_BORDER_COLOR = "#242426";
+export const ADD_SELECTED_FEATURE_BORDER_COLOR = "#290a01";
+
+export const PSIM_DEFAULT_COLOR = "#FBF8F3";
+export const PSIM_COLD_COLOR = "#1818ed";
+export const PSIM_VERY_COLD_COLOR = "#0101b3";
+export const PSIM_HOT_COLOR = "#7a1408";
+export const PSIM_VERY_HOT_COLOR = "#bd0606";
+export const PSIM_NA_COLOR = "#FBF8F3";
+
+// export const ADD_0_COLOR = "#FBF8F3";
+// export const ADD_1_COLOR = "#f88b78";
+// export const ADD_2_COLOR = "#fe5b4b";
+// export const ADD_3_COLOR = "#ec2c2c";
+// export const ADD_4_COLOR = "#d91d1d";
+// export const ADD_5_COLOR = "#b50f0f";
+// export const ADD_6_COLOR = "#990b0b";
+// export const ADD_7_COLOR = "#3d0101";
+
+// Magma
+export const ADD_0_COLOR = "#FBF8F3"; // Lightest
+export const ADD_1_COLOR = "#febb81";
+export const ADD_2_COLOR = "#f8765c";
+export const ADD_3_COLOR = "#d3436e";
+export const ADD_4_COLOR = "#982d80";
+export const ADD_5_COLOR = "#5f187f";
+export const ADD_6_COLOR = "#221150";
+export const ADD_7_COLOR = "#000004"; // Darkest
+
+// Inferno
+// export const ADD_0_COLOR = "#FBF8F3"; // Lightest
+// export const ADD_1_COLOR = "#fac228";
+// export const ADD_2_COLOR = "#f57d15";
+// export const ADD_3_COLOR = "#d44842";
+// export const ADD_4_COLOR = "#9f2a63";
+// export const ADD_5_COLOR = "#65156e";
+// export const ADD_6_COLOR = "#280b53";
+// export const ADD_7_COLOR = "#000004";
+
+// Viridis
+// export const ADD_0_COLOR = "#FBF8F3"; // Lightest
+// export const ADD_1_COLOR = "#a0da39";
+// export const ADD_2_COLOR = "#4ac16d";
+// export const ADD_3_COLOR = "#1fa187";
+// export const ADD_4_COLOR = "#277f8e";
+// export const ADD_5_COLOR = "#365c8d";
+// export const ADD_6_COLOR = "#46327e";
+// export const ADD_7_COLOR = "#440154";
 
 // Widths
 export const FEATURE_BORDER_WIDTH = 0.8;

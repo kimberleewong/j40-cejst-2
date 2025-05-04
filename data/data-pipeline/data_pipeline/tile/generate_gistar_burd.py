@@ -8,7 +8,7 @@ from data_pipeline.utils import remove_all_from_dir
 logger = get_module_logger(__name__)
 
 
-def generate_tiles_gistar(data_path: Path, generate_tribal_layer: bool) -> None:
+def generate_tiles_gistar_burd(data_path: Path, generate_tribal_layer: bool) -> None:
     """Generates map tiles from geojson files
 
     Args:
@@ -21,10 +21,10 @@ def generate_tiles_gistar(data_path: Path, generate_tribal_layer: bool) -> None:
 
     def _generate_score_tiles() -> None:
         """Generates score map tiles"""
-        score_tiles_path = data_path / "score" / "tiles" / "gistar"
+        score_tiles_path = data_path / "score" / "tiles" / "gistar" / "burd"
         high_tile_path = score_tiles_path / "high"
         low_tile_path = score_tiles_path / "low"
-        score_geojson_dir = data_path / "score" / "geojson" / "gistar"
+        score_geojson_dir = data_path / "score" / "geojson" / "gistar" "burd"
 
         USA_HIGH_MIN_ZOOM = 5
         USA_HIGH_MAX_ZOOM = 11
@@ -44,7 +44,7 @@ def generate_tiles_gistar(data_path: Path, generate_tribal_layer: bool) -> None:
         cmd += f"--minimum-zoom={USA_HIGH_MIN_ZOOM} --maximum-zoom={USA_HIGH_MAX_ZOOM} --layer=blocks "
         cmd += "--no-feature-limit --no-tile-size-limit "
         cmd += f"--output={high_tile_path}/usa_high.mbtiles "
-        cmd += str(score_geojson_dir / "usa-high-gistar.json")
+        cmd += str(score_geojson_dir / "usa-high-gistar-burd.json")
         call(cmd, shell=True)
 
         # generate high mvts
@@ -53,7 +53,7 @@ def generate_tiles_gistar(data_path: Path, generate_tribal_layer: bool) -> None:
         cmd += f"--minimum-zoom={USA_HIGH_MIN_ZOOM} --maximum-zoom={USA_HIGH_MAX_ZOOM} --no-tile-compression "
         cmd += "--no-feature-limit  --no-tile-size-limit "
         cmd += f"--output-to-directory={high_tile_path} --layer=blocks "
-        cmd += str(score_geojson_dir / "usa-high-gistar.json")
+        cmd += str(score_geojson_dir / "usa-high-gistar-burd.json")
         call(cmd, shell=True)
 
         # generate low mbtiles file
@@ -61,7 +61,7 @@ def generate_tiles_gistar(data_path: Path, generate_tribal_layer: bool) -> None:
         cmd = "tippecanoe "
         cmd += f"--minimum-zoom={USA_LOW_MIN_ZOOM} --maximum-zoom={USA_LOW_MAX_ZOOM} --layer=blocks "
         cmd += f"--output={low_tile_path}/usa_low.mbtiles "
-        cmd += str(score_geojson_dir / "usa-low-gistar.json")
+        cmd += str(score_geojson_dir / "usa-low-gistar-burd.json")
         call(cmd, shell=True)
 
         # generate low mvts
@@ -70,7 +70,7 @@ def generate_tiles_gistar(data_path: Path, generate_tribal_layer: bool) -> None:
         cmd += f"--minimum-zoom={USA_LOW_MIN_ZOOM} --maximum-zoom={USA_LOW_MAX_ZOOM} --no-tile-compression "
         cmd += "--drop-densest-as-needed "
         cmd += f"--output-to-directory={low_tile_path} --layer=blocks "
-        cmd += str(score_geojson_dir / "usa-low-gistar.json")
+        cmd += str(score_geojson_dir / "usa-low-gistar-burd.json")
         call(cmd, shell=True)
 
     def _generate_tribal_tiles() -> None:

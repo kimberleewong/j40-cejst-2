@@ -223,13 +223,13 @@ const J40Header = ({location}:IJ40Header) => {
     </Link>,
     <MethNav key="methDropDown"/>,
     <AboutNav key="aboutDropDown"/>,
-    <Link
-      to={PAGES_ENDPOINTS.CONTACT}
-      key={'contact'}
-      activeClassName="usa-current"
-      data-cy={'nav-link-contact'}>
-      {intl.formatMessage(COMMON_COPY.HEADER.CONTACT)}
-    </Link>,
+    // <Link
+    //   to={PAGES_ENDPOINTS.CONTACT}
+    //   key={'contact'}
+    //   activeClassName="usa-current"
+    //   data-cy={'nav-link-contact'}>
+    //   {intl.formatMessage(COMMON_COPY.HEADER.CONTACT)}
+    // </Link>,
     <div key={'language'}>
       <Language isDesktop={false}/>
     </div>,
