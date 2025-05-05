@@ -424,13 +424,9 @@ const J40Map = ({location}: IJ40Interface) => {
           {/*
             /* Tribal layer is baked into Mapbox source,
              * only render here if we're not using that
-<<<<<<< HEAD
-            process.env.MAPBOX_STYLES_READ_TOKEN || <MapTribalLayer /> */}
-=======
              **/
             // process.env.MAPBOX_STYLES_READ_TOKEN || <MapTribalLayer />
           }
->>>>>>> 707792eb7c0fe5ac8a4a43e842db973e154d2181
 
           <MapTractLayers
             selectedFeatureId={selectedFeature?.id || ''} // Pass the selected feature ID
