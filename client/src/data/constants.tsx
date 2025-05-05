@@ -264,11 +264,6 @@ export const PSIM_BURDEN_HIGH_ZOOM_SOURCE_NAME =
   "psim-burden-high-zoom-source-name";
 export const PSIM_BURDEN_LOW_ZOOM_SOURCE_NAME =
   "psim-burden-low-zoom-source-name";
-<<<<<<< HEAD
-export const ADD_HIGH_ZOOM_SOURCE_NAME = "add-high-zoom-source-name";
-export const ADD_LOW_ZOOM_SOURCE_NAME = "add-low-zoom-source-name";
-// export const TRIBAL_SOURCE_NAME = "tribal-source-name";
-=======
 export const PSIM_INDICATOR_HIGH_ZOOM_SOURCE_NAME =
   "psim-indicator-high-zoom-source-name";
 export const PSIM_INDICATOR_LOW_ZOOM_SOURCE_NAME =
@@ -280,7 +275,6 @@ export const ADD_IND_HIGH_ZOOM_SOURCE_NAME = "add-ind-high-zoom-source-name";
 export const ADD_IND_LOW_ZOOM_SOURCE_NAME = "add-ind-low-zoom-source-name";
 
 export const TRIBAL_SOURCE_NAME = "tribal-source-name";
->>>>>>> 707792eb7c0fe5ac8a4a43e842db973e154d2181
 
 // Layer ID constants
 export const SCORE_SOURCE_LAYER = "blocks"; // The name of the layer within the tiles that contains the score
