@@ -2,6 +2,8 @@
 .idea
 .vscode
 
+client/.env.development
+docker-compose.yml
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
