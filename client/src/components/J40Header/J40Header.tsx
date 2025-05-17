@@ -117,32 +117,32 @@ const J40Header = ({location}: IJ40Header) => {
    * On mobile, the Methodology & Data page should have two sub-nav links. This defines
    * the array that will hold these links
    */
-  const methPageSubNavLinks = [
-    <Link
-      to={PAGES_ENDPOINTS.METHODOLOGY}
-      key={'methodology'}
-      activeClassName="usa-current"
-      data-cy={'nav-link-methodology'}
-    >
-      {intl.formatMessage(COMMON_COPY.HEADER.METHODOLOGY)}
-    </Link>,
-    <Link
-      to={PAGES_ENDPOINTS.DOWNLOADS}
-      key={'downloads'}
-      activeClassName="usa-current"
-      data-cy={'nav-link-downloads'}
-    >
-      {intl.formatMessage(COMMON_COPY.HEADER.DOWNLOADS)}
-    </Link>,
-    <Link
-      to={PAGES_ENDPOINTS.PREVIOUS_VERSIONS}
-      key={'previous-versions'}
-      activeClassName="usa-current"
-      data-cy={'nav-link-previous-versions'}
-    >
-      {intl.formatMessage(COMMON_COPY.HEADER.PREVIOUS_VERSIONS)}
-    </Link>,
-  ];
+  // const methPageSubNavLinks = [
+  //   <Link
+  //     to={PAGES_ENDPOINTS.METHODOLOGY}
+  //     key={'methodology'}
+  //     activeClassName="usa-current"
+  //     data-cy={'nav-link-methodology'}
+  //   >
+  //     {intl.formatMessage(COMMON_COPY.HEADER.METHODOLOGY)}
+  //   </Link>,
+  //   <Link
+  //     to={PAGES_ENDPOINTS.DOWNLOADS}
+  //     key={'downloads'}
+  //     activeClassName="usa-current"
+  //     data-cy={'nav-link-downloads'}
+  //   >
+  //     {intl.formatMessage(COMMON_COPY.HEADER.DOWNLOADS)}
+  //   </Link>,
+  //   <Link
+  //     to={PAGES_ENDPOINTS.PREVIOUS_VERSIONS}
+  //     key={'previous-versions'}
+  //     activeClassName="usa-current"
+  //     data-cy={'nav-link-previous-versions'}
+  //   >
+  //     {intl.formatMessage(COMMON_COPY.HEADER.PREVIOUS_VERSIONS)}
+  //   </Link>,
+  // ];
 
   /**
    * On mobile, the About page should have 3 sub-nav links. This defines
@@ -155,45 +155,61 @@ const J40Header = ({location}: IJ40Header) => {
       activeClassName="usa-current"
       data-cy={'nav-link-about'}
     >
-      {intl.formatMessage(COMMON_COPY.HEADER.ABOUT)}
+      About
     </Link>,
     <Link
-      to={PAGES_ENDPOINTS.FAQS}
-      key={'faqs'}
+      to={PAGES_ENDPOINTS.DOWNLOADS}
+      key={'downloads'}
       activeClassName="usa-current"
-      data-cy={'nav-link-faqs'}
+      data-cy={'nav-link-downloads'}
     >
-      {intl.formatMessage(COMMON_COPY.HEADER.FAQS)}
+      User Guide
+    </Link>,
+    <Link
+      to={PAGES_ENDPOINTS.METHODOLOGY}
+      key={'methodology'}
+      activeClassName="usa-current"
+      data-cy={'nav-link-methodology'}
+    >
+      Methodology & Data
+    </Link>,
+    <Link
+      to={PAGES_ENDPOINTS.CONTACT}
+      key={'contact'}
+      activeClassName="usa-current"
+      data-cy={'nav-link-contact'}
+    >
+      Contact & Acknowledgements
     </Link>,
   ];
 
   // Methodology & Data Nav component
-  const MethNav = () => (
-    <>
-      {/* Add a className of usa-current anytime this component renders when the location of the app is on
-      the Methodology page or the downloads page. This will style the nav link with a bottom border */}
-      <NavDropDownButton
-        className={
-          lastSegmentLocation === PAGES_ENDPOINTS.METHODOLOGY.slice(1) ||
-          lastSegmentLocation === PAGES_ENDPOINTS.DOWNLOADS.slice(1) ?
-            'usa-current' :
-            ''
-        }
-        key="methDropDown"
-        label={intl.formatMessage(COMMON_COPY.HEADER.METHODOLOGY)}
-        menuId="methMenu"
-        isOpen={isOpen[0]}
-        onToggle={(): void => onToggle(0)}
-        data-cy={'nav-dropdown-methodology'}
-      ></NavDropDownButton>
-      <Menu
-        id="methMenu"
-        type="subnav"
-        items={methPageSubNavLinks}
-        isOpen={isOpen[0]}
-      ></Menu>
-    </>
-  );
+  // const MethNav = () => (
+  //   <>
+  //     {/* Add a className of usa-current anytime this component renders when the location of the app is on
+  //     the Methodology page or the downloads page. This will style the nav link with a bottom border */}
+  //     <NavDropDownButton
+  //       className={
+  //         lastSegmentLocation === PAGES_ENDPOINTS.METHODOLOGY.slice(1) ||
+  //         lastSegmentLocation === PAGES_ENDPOINTS.DOWNLOADS.slice(1) ?
+  //           'usa-current' :
+  //           ''
+  //       }
+  //       key="methDropDown"
+  //       label={intl.formatMessage(COMMON_COPY.HEADER.METHODOLOGY)}
+  //       menuId="methMenu"
+  //       isOpen={isOpen[0]}
+  //       onToggle={(): void => onToggle(0)}
+  //       data-cy={'nav-dropdown-methodology'}
+  //     ></NavDropDownButton>
+  //     <Menu
+  //       id="methMenu"
+  //       type="subnav"
+  //       items={methPageSubNavLinks}
+  //       isOpen={isOpen[0]}
+  //     ></Menu>
+  //   </>
+  // );
 
   // About Nav component
   const AboutNav = () => (
@@ -208,7 +224,8 @@ const J40Header = ({location}: IJ40Header) => {
             ''
         }
         key="aboutDropDown"
-        label={intl.formatMessage(COMMON_COPY.HEADER.ABOUT)}
+        label="Information"
+        // label={intl.formatMessage(COMMON_COPY.HEADER.ABOUT)}
         menuId="aboutMenu"
         isOpen={isOpen[1]}
         onToggle={(): void => onToggle(1)}
@@ -219,6 +236,7 @@ const J40Header = ({location}: IJ40Header) => {
         type="subnav"
         items={aboutPageSubNavLinks}
         isOpen={isOpen[1]}
+        className={styles.dropdownAlignLeft}
       ></Menu>
     </>
   );
@@ -231,18 +249,26 @@ const J40Header = ({location}: IJ40Header) => {
       activeClassName="usa-current"
       data-cy={'nav-link-explore-the-map'}
     >
-      {intl.formatMessage(COMMON_COPY.HEADER.EXPLORE)}
+      Explore the Map
     </Link>,
-    <MethNav key="methDropDown" />,
-    <AboutNav key="aboutDropDown" />,
     <Link
-      to={PAGES_ENDPOINTS.CONTACT}
-      key={'contact'}
+      to={PAGES_ENDPOINTS.DATA}
+      key={'explore-data'}
       activeClassName="usa-current"
-      data-cy={'nav-link-contact'}
+      data-cy={'nav-link-explore-the-data'}
     >
-      {intl.formatMessage(COMMON_COPY.HEADER.CONTACT)}
+      Explore the Data
     </Link>,
+    // <MethNav key="methDropDown" />,
+    <AboutNav key="aboutDropDown" />,
+    // <Link
+    //   to={PAGES_ENDPOINTS.CONTACT}
+    //   key={'contact'}
+    //   activeClassName="usa-current"
+    //   data-cy={'nav-link-contact'}
+    // >
+    //   {intl.formatMessage(COMMON_COPY.HEADER.CONTACT)}
+    // </Link>,
     <div key={'language'}>
       <Language isDesktop={false} />
     </div>,
@@ -255,49 +281,56 @@ const J40Header = ({location}: IJ40Header) => {
       <UpdateBanner/> */}
 
       {/* Logo and Navigation */}
-      <J40MainGridContainer>
-        <Grid className={styles.logoNavRow} row>
-          {/* Logo */}
-          <Grid col={1}>
-            <Link
-              to={PAGES_ENDPOINTS.EXPLORE}
-              key={'explore-map'}
-              data-cy={'nav-link-explore-the-map'}
-            >
-              <img
-                className={styles.logo}
-                src={siteLogo}
-                alt={`${logoLine1}`}
-              />
-            </Link>
-          </Grid>
+      <J40MainGridContainer fullWidth>
+        <div style={{maxWidth: '90%', margin: 'auto'}}>
+          <Grid className={styles.logoNavRow} row>
+            {/* Logo */}
+            <Grid col={1}>
+              <Link
+                to={PAGES_ENDPOINTS.EXPLORE}
+                key={'explore-map'}
+                data-cy={'nav-link-explore-the-map'}
+              >
+                <img
+                  className={styles.logo}
+                  src={siteLogo}
+                  alt={`${logoLine1}`}
+                />
+              </Link>
+              <Link
+                to={PAGES_ENDPOINTS.DATA}
+                key={'explore-data'}
+                data-cy={'nav-link-explore-the-data'}
+              ></Link>
+            </Grid>
 
-          {/* Logo Title */}
-          <Grid col={6} style={{alignContent: 'center'}}>
-            <Link
-              to={PAGES_ENDPOINTS.EXPLORE}
-              key={'explore-map'}
-              className="remove-link-style"
-              data-cy={'nav-link-explore-the-map'}
-            >
-              <div className={styles.logoTitle}>{logoLine1}</div>
-            </Link>
-          </Grid>
+            {/* Logo Title */}
+            <Grid col={6} style={{alignContent: 'center'}}>
+              <Link
+                to={PAGES_ENDPOINTS.EXPLORE}
+                key={'explore-map'}
+                className="remove-link-style"
+                data-cy={'nav-link-explore-the-map'}
+              >
+                <div className={styles.logoTitle}>{logoLine1}</div>
+              </Link>
+            </Grid>
 
-          {/* Nav links */}
-          <Grid col={'fill'} className={styles.navLinks}>
-            <NavMenuButton
-              key={'mobileMenuButton'}
-              onClick={toggleMobileNav}
-              label="Menu"
-            ></NavMenuButton>
-            <PrimaryNav
-              items={navLinks}
-              mobileExpanded={mobileNavOpen}
-              onToggleMobileNav={toggleMobileNav}
-            ></PrimaryNav>
+            {/* Nav links */}
+            <Grid col={'fill'} className={styles.navLinks}>
+              <NavMenuButton
+                key={'mobileMenuButton'}
+                onClick={toggleMobileNav}
+                label="Menu"
+              ></NavMenuButton>
+              <PrimaryNav
+                items={navLinks}
+                mobileExpanded={mobileNavOpen}
+                onToggleMobileNav={toggleMobileNav}
+              ></PrimaryNav>
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
       </J40MainGridContainer>
 
       {/* Alert */}

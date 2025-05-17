@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
 import {LocalizedComponent} from '../../test/testHelpers';
-import DownloadsPage from '../downloads';
+import DownloadsPage from '../user-guide';
 
 describe('rendering of the DatasetContainer', () => {
   const {asFragment} = render(
       <LocalizedComponent>
-        <DownloadsPage location={window.location}/>
+        <DownloadsPage location={window.location} />
       </LocalizedComponent>,
   );
 

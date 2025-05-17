@@ -10,6 +10,7 @@ declare namespace J40HeaderNamespace {
         betaPill: string;
         navLinks: string;
         alert: string;
+        dropdownAlignLeft: string;
     }
   }
 

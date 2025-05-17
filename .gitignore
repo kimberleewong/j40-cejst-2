@@ -158,3 +158,6 @@ temp_dir
 
 # production data
 */data-pipeline/data_pipeline/data-versions/*
+
+# docker compose
+docker-compose.yml

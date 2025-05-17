@@ -5,16 +5,17 @@ export const isMobile = isMobileReactDeviceDetect;
 
 // Pages URL
 export const PAGES_ENDPOINTS = {
-  EXPLORE: '/',
-  METHODOLOGY: '/methodology',
-  DOWNLOADS: '/downloads',
-  TSD: '/technical-support-document',
-  ABOUT: '/about',
-  FAQS: '/frequently-asked-questions',
-  PUBLIC_ENG: '/public-engagement',
-  CONTACT: '/contact',
-  PREVIOUS_VERSIONS: '/previous-versions',
-  PRIVACY: '/privacy',
+  EXPLORE: "/",
+  METHODOLOGY: "/methodology",
+  DOWNLOADS: "/user-guide",
+  TSD: "/technical-support-document",
+  ABOUT: "/about",
+  FAQS: "/frequently-asked-questions",
+  PUBLIC_ENG: "/public-engagement",
+  CONTACT: "/contact",
+  PREVIOUS_VERSIONS: "/previous-versions",
+  PRIVACY: "/privacy",
+  DATA: "/data",
 };
 
 // Performance markers
@@ -350,7 +351,7 @@ export const LOW_ZOOM_PRIORITIZED_FEATURE_FILL_OPACITY = 0.6;
 export const NON_PRIORITIZED_FEATURE_FILL_OPACITY = 0;
 export const TRIBAL_FEATURE_FILL_OPACITY = 0.3;
 export const LOW_ZOOM_PSIM_FEATURE_FILL_OPACITY = 0.7;
-export const HIGH_ZOOM_PSIM_FEATURE_FILL_OPACITY = 0.5;
+export const HIGH_ZOOM_PSIM_FEATURE_FILL_OPACITY = 0.6;
 
 // Colors
 export const FEATURE_BORDER_COLOR = '#4EA5CF';
@@ -371,12 +372,14 @@ export const ADD_FEATURE_BORDER_COLOR = '#A0506B';
 export const PSIM_SELECTED_FEATURE_BORDER_COLOR = '#242426';
 export const ADD_SELECTED_FEATURE_BORDER_COLOR = '#290a01';
 
-export const PSIM_DEFAULT_COLOR = '#FBF8F3';
-export const PSIM_COLD_COLOR = '#1818ed';
-export const PSIM_VERY_COLD_COLOR = '#0101b3';
-export const PSIM_HOT_COLOR = '#7a1408';
-export const PSIM_VERY_HOT_COLOR = '#bd0606';
-export const PSIM_NA_COLOR = '#FBF8F3';
+export const PSIM_DEFAULT_COLOR = "#FBF8F3";
+export const PSIM_COLD_COLOR = "#1818ed";
+export const PSIM_VERY_COLD_COLOR = "#0101b3";
+// export const PSIM_HOT_COLOR = "#7a1408";
+export const PSIM_HOT_COLOR = "#cf1717";
+export const PSIM_VERY_HOT_COLOR = "#ad0000";
+// export const PSIM_VERY_HOT_COLOR = "#bd0606";
+export const PSIM_NA_COLOR = "#FBF8F3";
 
 // export const ADD_0_COLOR = "#FBF8F3";
 // export const ADD_1_COLOR = "#f88b78";

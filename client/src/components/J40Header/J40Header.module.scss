@@ -1,5 +1,10 @@
 @use '../../styles/design-system.scss' as *;
 
+.dropdownAlignLeft {
+  left: auto !important;
+  right: 0 !important;
+  transform: none !important;
+}
 
 .logoNavRow {
   @include u-margin-top(4);

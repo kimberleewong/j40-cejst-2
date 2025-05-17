@@ -2,14 +2,18 @@ import React, {useState, useEffect} from 'react';
 import * as Plot from '@observablehq/plot';
 import * as d3 from 'd3';
 
-const ObservableTest = () => {
+interface Props {
+  url: string;
+}
+
+const IndicatorDemGraph = ({url}: Props) => {
   const [data, setData] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Fetch the data
-    const url =
-      'http://localhost:5001/data/data-pipeline/data_pipeline/data/score/geojson/ind_dem_long.json';
+    // const url =
+    //   'http://localhost:5001/data/data-pipeline/data_pipeline/data/score/geojson/ind_dem_long.json';
     console.log('Fetching data from:', url);
 
     fetch(url)
@@ -87,7 +91,7 @@ const ObservableTest = () => {
           }),
         ],
         y: {axis: true, label: 'Percentage'},
-        x: {label: 'Total Indicators'},
+        x: {label: 'Indicator Thresholds Exceeded'},
         color: {
           range: colorPalette,
           legend: true,
@@ -98,7 +102,7 @@ const ObservableTest = () => {
         marginTop: 30,
         style: {
           fontFamily: 'Lexend, sans-serif',
-          fontSize: '14px',
+          fontSize: '16px',
         },
       });
 
@@ -167,7 +171,7 @@ const ObservableTest = () => {
     return <div>Loading Data...</div>;
   }
 
-  return <div id="chart-container-1" />;
+  return <div id="chart-container-2" />;
 };
 
-export default ObservableTest;
+export default IndicatorDemGraph;

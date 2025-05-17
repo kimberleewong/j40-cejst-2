@@ -1,6 +1,7 @@
 /* eslint-disable quotes */
 // External Libs:
-import {Accordion, Button, Icon} from "@trussworks/react-uswds";
+import {Accordion} from "@trussworks/react-uswds";
+// import {Accordion, Button, Icon} from "@trussworks/react-uswds";
 import {MessageDescriptor, useIntl} from "gatsby-plugin-intl";
 import React from "react";
 
@@ -138,7 +139,7 @@ const AreaDetail = ({properties}: IAreaDetailProps) => {
   const setCategoryIndicators = (id: string, indicators: indicatorInfo[]) => {
     const cat = categories.find((category) => category.id === id);
     if (cat) cat.indicators = indicators;
-    else throw new Error('Unknown side panel category ID ' + id);
+    else throw new Error("Unknown side panel category ID " + id);
   };
 
   // console.log the properties of the census that is selected:
@@ -1000,12 +1001,17 @@ const AreaDetail = ({properties}: IAreaDetailProps) => {
   if (sidePanelState === constants.SIDE_PANEL_STATE_VALUES.PUERTO_RICO) {
     // Re-define which burdens show up for each category:
 
-    setCategoryIndicators('climate-change', [flooding]);
-    setCategoryIndicators('clean-energy', [energyCost]);
-    setCategoryIndicators('sustain-house', [historicUnderinvest, houseCost, lackPlumbing, leadPaint]);
-    setCategoryIndicators('leg-pollute', [proxHaz, proxRMP, proxNPL]);
-    setCategoryIndicators('clean-transport', [dieselPartMatter, trafficVolume]);
-    setCategoryIndicators('work-dev', [lowMedInc, poverty, unemploy]);
+    setCategoryIndicators("climate-change", [flooding]);
+    setCategoryIndicators("clean-energy", [energyCost]);
+    setCategoryIndicators("sustain-house", [
+      historicUnderinvest,
+      houseCost,
+      lackPlumbing,
+      leadPaint,
+    ]);
+    setCategoryIndicators("leg-pollute", [proxHaz, proxRMP, proxNPL]);
+    setCategoryIndicators("clean-transport", [dieselPartMatter, trafficVolume]);
+    setCategoryIndicators("work-dev", [lowMedInc, poverty, unemploy]);
   }
 
   if (sidePanelState === constants.SIDE_PANEL_STATE_VALUES.ISLAND_AREAS) {
@@ -1021,14 +1027,17 @@ const AreaDetail = ({properties}: IAreaDetailProps) => {
 
   const isGrandfathered = properties[constants.IS_GRANDFATHERED];
   // Show Donut information !isGrandfathered
-  const showDonutCopy = !isGrandfathered &&
+  const showDonutCopy =
+    !isGrandfathered &&
     properties[constants.ADJACENCY_EXCEEDS_THRESH] &&
     properties[constants.TOTAL_NUMBER_OF_DISADVANTAGE_INDICATORS] === 0;
   const showIslandCopy = isTerritory && !showDonutCopy;
 
   // For territories we use the poverty percentile from the census decennial data
   const poveryPercentile = isTerritory ?
-    properties[constants.CENSUS_DECENNIAL_POVERTY_LESS_THAN_200_FPL_PERCENTILE] :
+    properties[
+        constants.CENSUS_DECENNIAL_POVERTY_LESS_THAN_200_FPL_PERCENTILE
+    ] :
     properties[constants.POVERTY_BELOW_200_PERCENTILE] > 0 ?
     properties[constants.POVERTY_BELOW_200_PERCENTILE] :
     null;
@@ -1059,10 +1068,9 @@ const AreaDetail = ({properties}: IAreaDetailProps) => {
     content: (
       <>
         {/* Indicators - filters then map */}
-        {category.indicators
-            .map((indicator: any, index: number) => {
-              return <Indicator key={`ind${index}`} indicator={indicator} />;
-            })}
+        {category.indicators.map((indicator: any, index: number) => {
+          return <Indicator key={`ind${index}`} indicator={indicator} />;
+        })}
 
         {/* AND */}
         <div className={styles.categorySpacer}>
@@ -1161,9 +1169,7 @@ const AreaDetail = ({properties}: IAreaDetailProps) => {
                 null
             }
             percentTractTribal={percentTractTribal}
-            isGrandfathered={
-              properties[constants.IS_GRANDFATHERED]
-            }
+            isGrandfathered={properties[constants.IS_GRANDFATHERED]}
           />
           <PrioritizationCopy2
             totalCategoriesPrioritized={
@@ -1190,17 +1196,16 @@ const AreaDetail = ({properties}: IAreaDetailProps) => {
         </div>
       </div>
 
-      {showIslandCopy &&
-        <IslandCopy povertyPercentile={poveryPercentile} />}
-      {showDonutCopy &&
+      {showIslandCopy && <IslandCopy povertyPercentile={poveryPercentile} />}
+      {showDonutCopy && (
         <DonutCopy
           isAdjacent={properties[constants.ADJACENCY_EXCEEDS_THRESH]}
           povertyBelow200Percentile={poveryPercentile}
         />
-      }
+      )}
 
       {/* Send Feedback button */}
-      <a
+      {/* <a
         className={styles.sendFeedbackLink}
         href={
           intl.locale === `es` ?
@@ -1219,15 +1224,21 @@ const AreaDetail = ({properties}: IAreaDetailProps) => {
             <Icon.Launch aria-label={intl.formatMessage(EXPLORE_COPY.COMMUNITY.SEND_FEEDBACK.IMG_ICON.ALT_TAG)} />
           </div>
         </Button>
-      </a>
+      </a> */}
 
       {/* All category accordions in this component */}
-      {<Accordion multiselectable={true} items={categoryItems} className="-AreaDetail" />}
+      {
+        <Accordion
+          multiselectable={true}
+          items={categoryItems}
+          className="-AreaDetail"
+        />
+      }
 
       {/* Methodology version */}
-      <div className={styles.versionInfo}>
+      {/* <div className={styles.versionInfo}>
         {EXPLORE_COPY.SIDE_PANEL_VERSION.TITLE}
-      </div>
+      </div> */}
     </aside>
   );
 };

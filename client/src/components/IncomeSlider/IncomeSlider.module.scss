@@ -1,0 +1,16 @@
+@use '../../styles/design-system.scss' as *;
+
+.incomeSliderContainer {
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+
+.noMarginTop {
+    margin-top: 0px !important;
+    margin-bottom: 5px !important;
+}
+
+.label {
+    padding: 5px;
+}

@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 // External Libs:
-import {Accordion, Button, Icon} from "@trussworks/react-uswds";
+import {Accordion} from "@trussworks/react-uswds";
 import {MessageDescriptor, useIntl} from "gatsby-plugin-intl";
 import React from "react";
 
@@ -8,12 +8,11 @@ import React from "react";
 import Category from "../Category";
 import DonutCopy from "../DonutCopy";
 import Indicator from "../Indicator";
-import PrioritizationCopy from "../PrioritizationCopy";
-import PrioritizationCopy2 from "../PrioritizationCopy2";
+// import PrioritizationCopy from "../PrioritizationCopy";
+// import PrioritizationCopy2 from "../PrioritizationCopy2";
 import TractDemographics from "../TractDemographics";
 import TractInfo from "../TractInfo";
 import HotspotInfo from "../HotspotInfo";
-import TractPrioritization from "../TractPrioritization";
 
 // Styles and constants
 import * as constants from "../../data/constants";
@@ -22,6 +21,7 @@ import * as styles from "./HotspotareaDetail.module.scss";
 
 // @ts-ignore
 import IslandCopy from "../IslandCopy/IslandCopy";
+import HotspotTractPrioritization from "../HotspotTractPrioritization";
 
 interface IHotspotAreaDetailProps {
   properties: constants.J40Properties;
@@ -175,12 +175,9 @@ const HotspotAreaDetail = ({properties}: IHotspotAreaDetailProps) => {
   );
 
   // Define data for hotspots
-  const zScore = properties[constants.GI_STAR_BURDEN] ?
-    properties[constants.GI_STAR_BURDEN] :
-    constants.MISSING_DATA_STRING;
-  const pValue = properties[constants.PSIM_BURDEN] ?
-    properties[constants.PSIM_BURDEN] :
-    constants.MISSING_DATA_STRING;
+  // const pValue = properties[constants.PSIM_BURDEN] ?
+  //   properties[constants.PSIM_BURDEN] :
+  //   constants.MISSING_DATA_STRING;
 
   // Fix constants.MISSING_DATA_STRING import
   const blockGroup = properties[constants.GEOID_PROPERTY] ?
@@ -197,12 +194,12 @@ const HotspotAreaDetail = ({properties}: IHotspotAreaDetailProps) => {
     constants.MISSING_DATA_STRING;
 
   const sidePanelState = properties[constants.SIDE_PANEL_STATE];
-  const percentTractTribal =
-    properties[constants.TRIBAL_AREAS_PERCENTAGE] >= 0 ?
-      parseFloat(
-          (properties[constants.TRIBAL_AREAS_PERCENTAGE] * 100).toFixed(),
-      ) :
-      null;
+  // const percentTractTribal =
+  //   properties[constants.TRIBAL_AREAS_PERCENTAGE] >= 0 ?
+  //     parseFloat(
+  //         (properties[constants.TRIBAL_AREAS_PERCENTAGE] * 100).toFixed(),
+  //     ) :
+  //     null;
 
   /**
    * The workforce development category has some indicators who's source will vary depending on which
@@ -1105,14 +1102,36 @@ const HotspotAreaDetail = ({properties}: IHotspotAreaDetailProps) => {
 
   return (
     <aside className={styles.areaDetailContainer} data-cy={"aside"}>
-      <h4>Gi Star Detailed info</h4>
-      <p>
-        I think this will need condition filtering depending on whether a tract
-        is a hotspot, coldspot, or NA
-      </p>
+      <div style={{paddingLeft: "1.2rem"}}>
+        <h4>Gi Star Detailed info</h4>
+        <p>More info here...</p>
+      </div>
 
-      {/* Tract Info */}
-      <HotspotInfo zScore={zScore} pValue={pValue} />
+      {/* Cluster class */}
+      <div className={styles.categorization}>
+        {/* Questions asking if disadvantaged? */}
+        <div className={styles.isInFocus}>Cluster Classification:</div>
+
+        {/* Hot spot, cold spot, NA */}
+        <div className={styles.communityOfFocus}>
+          <HotspotTractPrioritization
+            pValue={properties[constants.PSIM_BURDEN]}
+          ></HotspotTractPrioritization>
+        </div>
+      </div>
+
+      <div style={{paddingLeft: "1.2rem"}}>
+        {/* Tract Info */}
+        <HotspotInfo pValue={properties[constants.PSIM_BURDEN]} />
+        {/* <HotspotInfo
+          pValue={
+            visibleLayer === constants.PSIM_BURDEN_LAYER_ID ||
+            visibleLayer === constants.ADD_BURDEN_LAYER_ID
+              ? properties[constants.PSIM_BURDEN]
+              : properties[constants.PSIM_INDICATOR]
+          }
+        /> */}
+      </div>
 
       {/* Tract Info */}
       <TractInfo
@@ -1124,92 +1143,65 @@ const HotspotAreaDetail = ({properties}: IHotspotAreaDetailProps) => {
       />
 
       {/* Demographics */}
-      <TractDemographics properties={properties} />
-
-      {/* Disadvantaged? */}
-      <div className={styles.categorization}>
-        {/* Questions asking if disadvantaged? */}
-        <div className={styles.isInFocus}>
-          {EXPLORE_COPY.COMMUNITY.IS_FOCUS}
-        </div>
-
-        {/* YES, NO or PARTIALLY disadvantaged  */}
-        <div className={styles.communityOfFocus}>
-          <TractPrioritization
-            scoreNCommunities={
-              properties[constants.SCORE_N_COMMUNITIES] === true ?
-                properties[constants.SCORE_N_COMMUNITIES] :
-                false
-            }
-            tribalCountAK={
-              properties[constants.TRIBAL_AREAS_COUNT_AK] >= 1 ?
-                properties[constants.TRIBAL_AREAS_COUNT_AK] :
-                null
-            }
-            tribalCountUS={
-              properties[constants.TRIBAL_AREAS_COUNT_CONUS] >= 1 ?
-                properties[constants.TRIBAL_AREAS_COUNT_CONUS] :
-                null
-            }
-            percentTractTribal={percentTractTribal}
-          />
-        </div>
-
-        <div className={styles.prioCopy}>
-          <PrioritizationCopy
-            totalCategoriesPrioritized={
-              properties[constants.COUNT_OF_CATEGORIES_DISADV]
-            }
-            totalBurdensPrioritized={
-              properties[constants.TOTAL_NUMBER_OF_DISADVANTAGE_INDICATORS]
-            }
-            isAdjacencyThreshMet={
-              properties[constants.ADJACENCY_EXCEEDS_THRESH]
-            }
-            isAdjacencyLowIncome={
-              properties[constants.ADJACENCY_LOW_INCOME_EXCEEDS_THRESH]
-            }
-            isIslandLowIncome={
-              properties[constants.IS_FEDERAL_POVERTY_LEVEL_200] &&
-              constants.TILES_ISLAND_AREA_FIPS_CODES.some((code) => {
-                return properties[constants.GEOID_PROPERTY].startsWith(code);
-              })
-            }
-            tribalCountAK={
-              properties[constants.TRIBAL_AREAS_COUNT_AK] >= 1 ?
-                properties[constants.TRIBAL_AREAS_COUNT_AK] :
-                null
-            }
-            tribalCountUS={
-              properties[constants.TRIBAL_AREAS_COUNT_CONUS] >= 1 ?
-                properties[constants.TRIBAL_AREAS_COUNT_CONUS] :
-                null
-            }
-            percentTractTribal={percentTractTribal}
-            isGrandfathered={properties[constants.IS_GRANDFATHERED]}
-          />
-          <PrioritizationCopy2
-            totalCategoriesPrioritized={
-              properties[constants.COUNT_OF_CATEGORIES_DISADV]
-            }
-            isAdjacencyThreshMet={
-              properties[constants.ADJACENCY_EXCEEDS_THRESH]
-            }
-            isAdjacencyLowIncome={
-              properties[constants.ADJACENCY_LOW_INCOME_EXCEEDS_THRESH]
-            }
-            tribalCountAK={
-              properties[constants.TRIBAL_AREAS_COUNT_AK] >= 1 ?
-                properties[constants.TRIBAL_AREAS_COUNT_AK] :
-                null
-            }
-            tribalCountUS={
-              properties[constants.TRIBAL_AREAS_COUNT_CONUS] >= 1 ?
-                properties[constants.TRIBAL_AREAS_COUNT_CONUS] :
-                null
-            }
-            percentTractTribal={percentTractTribal}
-          />
+      <div style={{marginBottom: "0.8rem"}}>
+        <TractDemographics properties={properties} />
+        <div className={styles.categorization}>
+          {/* <div className={styles.prioCopy}>
+            <PrioritizationCopy
+              totalCategoriesPrioritized={
+                properties[constants.COUNT_OF_CATEGORIES_DISADV]
+              }
+              totalBurdensPrioritized={
+                properties[constants.TOTAL_NUMBER_OF_DISADVANTAGE_INDICATORS]
+              }
+              isAdjacencyThreshMet={
+                properties[constants.ADJACENCY_EXCEEDS_THRESH]
+              }
+              isAdjacencyLowIncome={
+                properties[constants.ADJACENCY_LOW_INCOME_EXCEEDS_THRESH]
+              }
+              isIslandLowIncome={
+                properties[constants.IS_FEDERAL_POVERTY_LEVEL_200] &&
+                constants.TILES_ISLAND_AREA_FIPS_CODES.some((code) => {
+                  return properties[constants.GEOID_PROPERTY].startsWith(code);
+                })
+              }
+              tribalCountAK={
+                properties[constants.TRIBAL_AREAS_COUNT_AK] >= 1 ?
+                  properties[constants.TRIBAL_AREAS_COUNT_AK] :
+                  null
+              }
+              tribalCountUS={
+                properties[constants.TRIBAL_AREAS_COUNT_CONUS] >= 1 ?
+                  properties[constants.TRIBAL_AREAS_COUNT_CONUS] :
+                  null
+              }
+              percentTractTribal={percentTractTribal}
+              isGrandfathered={properties[constants.IS_GRANDFATHERED]}
+            />
+            <PrioritizationCopy2
+              totalCategoriesPrioritized={
+                properties[constants.COUNT_OF_CATEGORIES_DISADV]
+              }
+              isAdjacencyThreshMet={
+                properties[constants.ADJACENCY_EXCEEDS_THRESH]
+              }
+              isAdjacencyLowIncome={
+                properties[constants.ADJACENCY_LOW_INCOME_EXCEEDS_THRESH]
+              }
+              tribalCountAK={
+                properties[constants.TRIBAL_AREAS_COUNT_AK] >= 1 ?
+                  properties[constants.TRIBAL_AREAS_COUNT_AK] :
+                  null
+              }
+              tribalCountUS={
+                properties[constants.TRIBAL_AREAS_COUNT_CONUS] >= 1 ?
+                  properties[constants.TRIBAL_AREAS_COUNT_CONUS] :
+                  null
+              }
+              percentTractTribal={percentTractTribal}
+            />
+          </div> */}
         </div>
       </div>
 
@@ -1222,7 +1214,7 @@ const HotspotAreaDetail = ({properties}: IHotspotAreaDetailProps) => {
       )}
 
       {/* Send Feedback button */}
-      <a
+      {/* <a
         className={styles.sendFeedbackLink}
         href={
           intl.locale === `es` ?
@@ -1245,7 +1237,7 @@ const HotspotAreaDetail = ({properties}: IHotspotAreaDetailProps) => {
             />
           </div>
         </Button>
-      </a>
+      </a> */}
 
       {/* All category accordions in this component */}
       {
@@ -1257,9 +1249,9 @@ const HotspotAreaDetail = ({properties}: IHotspotAreaDetailProps) => {
       }
 
       {/* Methodology version */}
-      <div className={styles.versionInfo}>
+      {/* <div className={styles.versionInfo}>
         {EXPLORE_COPY.SIDE_PANEL_VERSION.TITLE}
-      </div>
+      </div> */}
     </aside>
   );
 };

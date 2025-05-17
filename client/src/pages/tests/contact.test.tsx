@@ -6,7 +6,7 @@ import Contact from '../contact';
 describe('rendering of the DatasetContainer', () => {
   const {asFragment} = render(
       <LocalizedComponent>
-        <Contact location={window.location}/>
+        <Contact location={window.location} />
       </LocalizedComponent>,
   );
 

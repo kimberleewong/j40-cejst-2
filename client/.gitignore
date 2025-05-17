@@ -6,3 +6,5 @@ cypress/screenshots/
 cypress/videos/
 .DS_Store
 coverage
+client/.env.development
+cliet/.env.production

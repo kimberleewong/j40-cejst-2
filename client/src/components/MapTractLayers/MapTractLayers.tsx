@@ -99,13 +99,6 @@ const MapTractLayers = ({
     setInteractiveLayerIds(initialInteractiveLayerIds);
   }, [visibleLayer, setInteractiveLayerIds, getInteractiveLayerIds]);
 
-  // const filter = useMemo(() => {
-  //   if (!selectedFeatureId) {
-  //     return null;
-  //   }
-  //   return ['in', constants.GEOID_PROPERTY, selectedFeatureId];
-  // }, [selectedFeatureId]);
-
   const filter = useMemo(
       () => ['in', constants.GEOID_PROPERTY, selectedFeatureId],
       [selectedFeatureId],
@@ -115,8 +108,14 @@ const MapTractLayers = ({
     <>
       <LayerToggleControl
         layers={[
-          {id: constants.ADD_BURDEN_LAYER_ID, name: 'Total Burdens'},
-          {id: constants.ADD_INDICATOR_LAYER_ID, name: 'Total Indicators'},
+          {
+            id: constants.ADD_BURDEN_LAYER_ID,
+            name: 'Burden Thresholds\nExceeded',
+          },
+          {
+            id: constants.ADD_INDICATOR_LAYER_ID,
+            name: 'Indicator Thresholds\nExceeded',
+          },
           {id: constants.PSIM_BURDEN_LAYER_ID, name: 'Burden Hotspots'},
           {id: constants.PSIM_INDICATOR_LAYER_ID, name: 'Indicator Hotspots'},
           {id: constants.LEGACY_LAYER_ID, name: 'Legacy Tool'},
@@ -261,9 +260,9 @@ const MapTractLayers = ({
                   -0.01,
                   constants.PSIM_VERY_COLD_COLOR,
                   -1e-12,
-                  constants.PSIM_HOT_COLOR,
-                  0.01,
                   constants.PSIM_VERY_HOT_COLOR,
+                  0.009999,
+                  constants.PSIM_HOT_COLOR,
                   0.05,
                   constants.PSIM_NA_COLOR,
                 ],
@@ -301,10 +300,10 @@ const MapTractLayers = ({
                   constants.PSIM_COLD_COLOR,
                   -0.01,
                   constants.PSIM_VERY_COLD_COLOR,
-                  -1e-12,
-                  constants.PSIM_HOT_COLOR,
-                  0.01,
+                  0,
                   constants.PSIM_VERY_HOT_COLOR,
+                  0.0101,
+                  constants.PSIM_HOT_COLOR,
                   0.05,
                   constants.PSIM_NA_COLOR,
                 ],
@@ -368,9 +367,9 @@ const MapTractLayers = ({
                   -0.01,
                   constants.PSIM_VERY_COLD_COLOR,
                   -1e-12,
-                  constants.PSIM_HOT_COLOR,
-                  0.01,
                   constants.PSIM_VERY_HOT_COLOR,
+                  0.009999,
+                  constants.PSIM_HOT_COLOR,
                   0.05,
                   constants.PSIM_NA_COLOR,
                 ],
@@ -409,9 +408,9 @@ const MapTractLayers = ({
                   -0.01,
                   constants.PSIM_VERY_COLD_COLOR,
                   -1e-12,
-                  constants.PSIM_HOT_COLOR,
-                  0.01,
                   constants.PSIM_VERY_HOT_COLOR,
+                  1e-12,
+                  constants.PSIM_HOT_COLOR,
                   0.05,
                   constants.PSIM_NA_COLOR,
                 ],
@@ -505,11 +504,6 @@ const MapTractLayers = ({
             <Layer
               id={constants.ADD_BURDEN_HIGH_LAYER_ID}
               source-layer={constants.SCORE_SOURCE_LAYER}
-              filter={[
-                '>',
-                constants.TOTAL_POPULATION,
-                constants.PSIM_POP_THRESHOLD,
-              ]}
               type="fill"
               paint={{
                 'fill-color': [
@@ -624,11 +618,6 @@ const MapTractLayers = ({
             <Layer
               id={constants.ADD_INDICATOR_HIGH_LAYER_ID}
               source-layer={constants.SCORE_SOURCE_LAYER}
-              filter={[
-                '>',
-                constants.TOTAL_POPULATION,
-                constants.PSIM_POP_THRESHOLD,
-              ]}
               type="fill"
               paint={{
                 'fill-color': [

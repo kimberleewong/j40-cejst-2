@@ -1,6 +1,10 @@
 /* eslint-disable max-len */
 
-import {FormattedDate, FormattedMessage, FormattedNumber} from 'gatsby-plugin-intl';
+import {
+  FormattedDate,
+  FormattedMessage,
+  FormattedNumber,
+} from 'gatsby-plugin-intl';
 import React from 'react';
 import {defineMessages} from 'react-intl';
 
@@ -15,12 +19,14 @@ export const EXPLORE_PAGE_LINKS = {
   FED_REGISTER_CONSULT_TRIBE_GOV_2000: `https://www.federalregister.gov/documents/2000/11/09/00-29003/consultation-and-coordination-with-indian-tribal-governments`,
   CENSUS_15_19: `https://www.census.gov/programs-surveys/decennial-census/data.html`,
   DECENNIAL: `https://www.census.gov/programs-surveys/decennial-census/data.html`,
+  EDGI_CEJST: `https://edgi-govdata-archiving.github.io/j40-cejst-2/en/#3/33.47/-97.5`,
+  JUSTICE40_ARCHIVE: `https://bidenwhitehouse.archives.gov/environmentaljustice/justice40/`,
 };
 
 export const PAGE_INTRO = defineMessages({
   PAGE_TILE: {
     id: 'explore.map.page.title.text',
-    defaultMessage: 'Explore the map with MEDS Justice40',
+    defaultMessage: 'MEDS Justice40',
     description: 'On the explore the map page, the title of the page',
   },
   PAGE_HEADING: {
@@ -30,24 +36,34 @@ export const PAGE_INTRO = defineMessages({
   },
 });
 
-export const PAGE_DESCRIPTION1 = <FormattedMessage
-  id={'explore.map.page.description.1'}
-  defaultMessage={`
-    Census tracts that are marginalized by underinvestment and overburdened
-    by pollution are highlighted as being disadvantaged on the map. Federally
-    Recognized Tribes, including Alaska Native Villages, are considered
-    disadvantaged communities, whether or not they have land.
+export const PAGE_DESCRIPTION1 = (
+  <FormattedMessage
+    id={'explore.map.page.description.1'}
+    defaultMessage={`
+    Welcome to the CEJST+ tool. This tool is a reimagining of the <link1>Climate and Economic Justice Screening Tool</link1> created as part of the <link2>Justice 40 initiative</link2> in 2021. The original exploration of disadvantaged status has been expanded to include two new layers: <bold>cumulative</bold> and <bold>hotspot</bold>. The cumulative layer shows total exceeded threshold counts for burdens and indicators. The hotspot layer visualizes clusters of unusally high or low thresholds exceeded as hot or cold spots. The legacy layer shows the original CEJST tool. For more information on the new layers, please see the methodology tab. 
   `}
-  description={'On the explore the map page, the first description of the page'}
-/>;
+    description={
+      'On the explore the map page, the first description of the page'
+    }
+    values={{
+      link1: linkFn(EXPLORE_PAGE_LINKS.EDGI_CEJST, false, true),
+      link2: linkFn(EXPLORE_PAGE_LINKS.JUSTICE40_ARCHIVE, false, true),
+      bold: boldFn,
+    }}
+  />
+);
 
-export const PAGE_DESCRIPTION2 = <FormattedMessage
-  id={'explore.map.page.description.2'}
-  defaultMessage={`
-    Zooming in and selecting shows information about each census tract.
+export const PAGE_DESCRIPTION2 = (
+  <FormattedMessage
+    id={'explore.map.page.description.2'}
+    defaultMessage={`
+    More information, including demographics and thresholds exceeded, can be found by zooming in and selecting a census tract.
   `}
-  description={'On the explore the map page, the fifth description of the page'}
-/>;
+    description={
+      'On the explore the map page, the fifth description of the page'
+    }
+  />
+);
 
 export const LEGEND = defineMessages({
   PRIORITY_LABEL: {
@@ -71,42 +87,51 @@ export const EXPLORE_DATA_BOX = defineMessages({
   TITLE: {
     id: 'explore.map.page.explore.data.box.title',
     defaultMessage: 'Get the data',
-    description: 'On the explore the map page, a summary box title of Get the data',
+    description:
+      'On the explore the map page, a summary box title of Get the data',
   },
 });
 
-export const EXPLORE_DATA_BOX_BODY = <FormattedMessage
-  id={'explore.map.page.explore.data.box.body'}
-  defaultMessage={ `
+export const EXPLORE_DATA_BOX_BODY = (
+  <FormattedMessage
+    id={'explore.map.page.explore.data.box.body'}
+    defaultMessage={`
     Download the data with documentation and shapefile from the <link1>downloads</link1> page.
   `}
-  description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Things to know, this is the fifth paragraph of this side pane`}
-  values={{
-    link1: linkFn(PAGES_ENDPOINTS.DOWNLOADS, true, false),
-  }}
-/>;
+    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Things to know, this is the fifth paragraph of this side pane`}
+    values={{
+      link1: linkFn(PAGES_ENDPOINTS.DOWNLOADS, true, false),
+    }}
+  />
+);
 
 // Map
 export const MAP = defineMessages({
   ZOOM_WARNING: {
     id: 'explore.map.page.map.zoom.warning',
-    defaultMessage: 'Zoom in to the state or regional level to see prioritized communities on the map.',
-    description: 'On the explore the map page, on the map, the zoom warning on map',
+    defaultMessage:
+      'Zoom in to the state or regional level to see prioritized communities on the map.',
+    description:
+      'On the explore the map page, on the map, the zoom warning on map',
   },
   SEARCH_PLACEHOLDER: {
     id: 'explore.map.page.map.search.placeholder.text',
     defaultMessage: 'Search for an address, city, state, ZIP or Census Tract',
-    description: 'On the explore the map page, on the map, the placeholder text for search',
+    description:
+      'On the explore the map page, on the map, the placeholder text for search',
   },
   SEARCH_PLACEHOLDER_MOBILE: {
     id: 'explore.map.page.map.search.placeholder.mobile.text',
     defaultMessage: 'Search locations',
-    description: 'On the explore the map page, on the map, the placeholder text for search',
+    description:
+      'On the explore the map page, on the map, the placeholder text for search',
   },
   SEARCH_RESULTS_EMPTY_MESSAGE: {
     id: 'explore.map.page.map.search.results.empty.text',
-    defaultMessage: 'Location not found or unknown. Please try a different search.',
-    description: 'On the explore the map page, on the map, the text displaying message for no search results found',
+    defaultMessage:
+      'Location not found or unknown. Please try a different search.',
+    description:
+      'On the explore the map page, on the map, the text displaying message for no search results found',
   },
   LOWER48_SHORT: {
     id: 'explore.map.page.map.territoryFocus.lower48.short',
@@ -123,42 +148,50 @@ export const MAP = defineMessages({
   ALASKA_SHORT: {
     id: 'explore.map.page.map.territoryFocus.alaska.short',
     defaultMessage: 'AK',
-    description: 'On the explore the map page, on the map, the abbreviated indicating the bounds of Alaska',
+    description:
+      'On the explore the map page, on the map, the abbreviated indicating the bounds of Alaska',
   },
   ALASKA_LONG: {
     id: 'explore.map.page.map.territoryFocus.alaska.long',
     defaultMessage: 'Alaska',
-    description: 'On the explore the map page, on the map, the full name indicating the bounds of Alaska',
+    description:
+      'On the explore the map page, on the map, the full name indicating the bounds of Alaska',
   },
   HAWAII_SHORT: {
     id: 'explore.map.page.map.territoryFocus.hawaii.short',
     defaultMessage: 'HI',
-    description: 'On the explore the map page, on the map, the abbreviated name indicating the bounds of Hawaii',
+    description:
+      'On the explore the map page, on the map, the abbreviated name indicating the bounds of Hawaii',
   },
   HAWAII_LONG: {
     id: 'explore.map.page.map.territoryFocus.hawaii.long',
     defaultMessage: 'Hawaii',
-    description: 'On the explore the map page, on the map, the longer name indicating the bounds of Hawaii',
+    description:
+      'On the explore the map page, on the map, the longer name indicating the bounds of Hawaii',
   },
   PR_SHORT: {
     id: 'explore.map.page.map.territoryFocus.puerto_rico.short',
     defaultMessage: 'PR',
-    description: 'On the explore the map page, on the map, the abbreviated name indicating the bounds of Puerto Rico',
+    description:
+      'On the explore the map page, on the map, the abbreviated name indicating the bounds of Puerto Rico',
   },
   PR_LONG: {
     id: 'explore.map.page.map.territoryFocus.puerto_rico.long',
     defaultMessage: 'Puerto Rico',
-    description: 'On the explore the map page, on the map, the full name indicating the bounds of Puerto Rico',
+    description:
+      'On the explore the map page, on the map, the full name indicating the bounds of Puerto Rico',
   },
   GU_SHORT: {
     id: 'explore.map.page.map.territoryFocus.guam.short',
     defaultMessage: 'GU',
-    description: 'On the explore the map page, on the map, the abbreviated name indicating the bounds of Guam',
+    description:
+      'On the explore the map page, on the map, the abbreviated name indicating the bounds of Guam',
   },
   GU_LONG: {
     id: 'explore.map.page.map.territoryFocus.guam.long',
     defaultMessage: 'Guam',
-    description: 'On the explore the map page, on the map, the full name indicating the bounds of Guam',
+    description:
+      'On the explore the map page, on the map, the full name indicating the bounds of Guam',
   },
   AS_SHORT: {
     id: 'explore.map.page.map.territoryFocus.american.samoa.short',
@@ -168,7 +201,8 @@ export const MAP = defineMessages({
   AS_LONG: {
     id: 'explore.map.page.map.territoryFocus.american.samoa.long',
     defaultMessage: 'American Samoa',
-    description: 'On the explore the map page, on the map, the full name indicating the bounds of American Samoa',
+    description:
+      'On the explore the map page, on the map, the full name indicating the bounds of American Samoa',
   },
   MP_SHORT: {
     id: 'explore.map.page.map.territoryFocus.commonwealth.nmp.short',
@@ -188,17 +222,20 @@ export const MAP = defineMessages({
   VI_LONG: {
     id: 'explore.map.page.map.territoryFocus.us.virgin.islands.long',
     defaultMessage: 'US Virgin Islands',
-    description: 'On the explore the map page, on the map, the full name indicating the bounds of US Virgin Islands',
+    description:
+      'On the explore the map page, on the map, the full name indicating the bounds of US Virgin Islands',
   },
   GEOLOC_MSG_LOCATING: {
     id: 'explore.map.page.map.geolocation.locating',
     defaultMessage: 'Finding location...',
-    description: 'On the explore the map page, on the map, this is the message above the gelocation icon that geolocation is locating.',
+    description:
+      'On the explore the map page, on the map, this is the message above the gelocation icon that geolocation is locating.',
   },
   GEOLOC_MSG_DISABLED: {
     id: 'explore.map.page.map.geolocation.disabled',
     defaultMessage: 'Geolocation disabled',
-    description: 'On the explore the map page, on the map, this is the message above the gelocation icon that geolocation is disabled.',
+    description:
+      'On the explore the map page, on the map, this is the message above the gelocation icon that geolocation is disabled.',
   },
   // GEOLOC_MSG_OFF: {
   //   id: 'explore.map.page.map.geolocation.off',
@@ -213,25 +250,28 @@ export const MAP = defineMessages({
   CENSUS_TRACT_LONG: {
     id: 'explore.map.page.map.layer.selector.tracts.long',
     defaultMessage: 'Census Tracts',
-    description: 'On the explore the map page, on the map, the full name indicating Census Tracts',
+    description:
+      'On the explore the map page, on the map, the full name indicating Census Tracts',
   },
   CENSUS_TRACT_SHORT: {
     id: 'explore.map.page.map.layer.selector.tracts.short',
     defaultMessage: 'Tracts',
-    description: 'On the explore the map page, on the map, the short name indicating Census Tracts',
+    description:
+      'On the explore the map page, on the map, the short name indicating Census Tracts',
   },
   TRIBAL_LANDS_LONG: {
     id: 'explore.map.page.map.layer.selector.tribal.long',
     defaultMessage: 'Tribal Lands',
-    description: 'On the explore the map page, on the map, the full name indicating Tribal Lands',
+    description:
+      'On the explore the map page, on the map, the full name indicating Tribal Lands',
   },
   TRIBAL_LANDS_SHORT: {
     id: 'explore.map.page.map.layer.selector.tribal.short',
     defaultMessage: 'Tribal',
-    description: 'On the explore the map page, on the map, the short name indicating Tribal Lands',
+    description:
+      'On the explore the map page, on the map, the short name indicating Tribal Lands',
   },
 });
-
 
 // Side Panel non-selected state copy
 export const SIDE_PANEL_INITIAL_STATE = defineMessages({
@@ -240,42 +280,48 @@ export const SIDE_PANEL_INITIAL_STATE = defineMessages({
     defaultMessage: `
       How to use the map:
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the first heading of the non-selected side panel',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the first heading of the non-selected side panel',
   },
   PARA1_PART1: {
     id: 'explore.map.page.side.panel.info.para.1.part.1',
     defaultMessage: `
       Zoom in
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Zoom in',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Zoom in',
   },
   PARA1_PART2: {
     id: 'explore.map.page.side.panel.info.para.1.part.2',
     defaultMessage: `
       , search
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show search',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show search',
   },
   PARA1_PART3: {
     id: 'explore.map.page.side.panel.info.para.1.part.3',
     defaultMessage: `
       , or locate yourself
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show or locate yourself',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show or locate yourself',
   },
   PARA1_PART4: {
     id: 'explore.map.page.side.panel.info.para.1.part.4',
     defaultMessage: `
       and select
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show and select',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show and select',
   },
   PARA1_PART5: {
     id: 'explore.map.page.side.panel.info.para.1.part.5',
     defaultMessage: `
       to see information about any census tract.
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show to see information about any census tract',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show to see information about any census tract',
   },
   HEADING2: {
     id: 'explore.map.page.side.panel.info.heading2',
@@ -289,91 +335,104 @@ export const SIDE_PANEL_INITIAL_STATE = defineMessages({
     defaultMessage: `
       The tool uses census tracts
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show The tool uses census tracts',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show The tool uses census tracts',
   },
   PARA2_PART2: {
     id: 'explore.map.page.side.panel.info.para.2.part.2',
     defaultMessage: `
     . Census tracts are a small unit of geography. They generally have populations
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Census tracts are a small unit of geography. They generally have populations of between 1,200 - 8,000 people.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Census tracts are a small unit of geography. They generally have populations of between 1,200 - 8,000 people.',
   },
   PARA2_PART3: {
     id: 'explore.map.page.side.panel.info.para.2.part.3',
     defaultMessage: `
       of between 1,200 - 8,000 people.
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Census tracts are a small unit of geography. They generally have populations of between 1,200 - 8,000 people.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Census tracts are a small unit of geography. They generally have populations of between 1,200 - 8,000 people.',
   },
   PARA3_PART1: {
     id: 'explore.map.page.side.panel.info.para.3.part.1',
     defaultMessage: `
       Communities that are disadvantaged live in tracts that experience burdens. These tracts are highlighted
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Communities that are disadvantaged live in tracts that experience burdens. These tracts are highlighted on the map.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Communities that are disadvantaged live in tracts that experience burdens. These tracts are highlighted on the map.',
   },
   PARA3_PART2: {
     id: 'explore.map.page.side.panel.info.para.3.part.2',
     defaultMessage: `
     on the map.
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show on the map. This color is an opacity. This is so information about the map can be seen.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show on the map. This color is an opacity. This is so information about the map can be seen.',
   },
   PARA4_PART1: {
     id: 'explore.map.page.side.panel.info.para.4.part.1',
     defaultMessage: `
       The tool ranks most of the burdens using percentiles
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show The tool ranks most of the burdens using percentiles',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show The tool ranks most of the burdens using percentiles',
   },
   PARA4_PART2: {
     id: 'explore.map.page.side.panel.info.para.4.part.2',
     defaultMessage: `
     . Percentiles show how much burden each tract experiences when compared to other tracts.
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show percentages',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show percentages',
   },
   PARA5_PART1: {
     id: 'explore.map.page.side.panel.info.para.1',
     defaultMessage: `
       Thresholds
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Thresholds, or cutoffs, are used to determine if communities in a tract are disadvantaged. Certain burdens use percentages or a simple yes/no.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Thresholds, or cutoffs, are used to determine if communities in a tract are disadvantaged. Certain burdens use percentages or a simple yes/no.',
   },
   PARA5_PART2: {
     id: 'explore.map.page.side.panel.info.para.2',
     defaultMessage: `
     , or cutoffs, are used to determine if communities in a tract are disadvantaged. Certain burdens use percentages
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Thresholds, or cutoffs, are used to determine if communities in a tract are disadvantaged. Certain burdens use percentages or a simple yes/no.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Thresholds, or cutoffs, are used to determine if communities in a tract are disadvantaged. Certain burdens use percentages or a simple yes/no.',
   },
   PARA5_PART3: {
     id: 'explore.map.page.side.panel.info.para.3',
     defaultMessage: `
       or a simple yes/no
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Thresholds, or cutoffs, are used to determine if communities in a tract are disadvantaged. Certain burdens use percentages or a simple yes/no.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Thresholds, or cutoffs, are used to determine if communities in a tract are disadvantaged. Certain burdens use percentages or a simple yes/no.',
   },
   PARA5_PART4: {
     id: 'explore.map.page.side.panel.info.para.4',
     defaultMessage: `
       .
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Thresholds, or cutoffs, are used to determine if communities in a tract are disadvantaged. Certain burdens use percentages or a simple yes/no.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Thresholds, or cutoffs, are used to determine if communities in a tract are disadvantaged. Certain burdens use percentages or a simple yes/no.',
   },
   PARA6_PART1: {
     id: 'explore.map.page.side.panel.info.para.6.part1',
     defaultMessage: `
       Land within the boundaries of Federally Recognized Tribes and point locations for Alaska Native Villages are highlighted
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Federally Recognized Tribal lands are also highlighted on the map. These communities are also considered disadvantaged.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Federally Recognized Tribal lands are also highlighted on the map. These communities are also considered disadvantaged.',
   },
   PARA6_PART2: {
     id: 'explore.map.page.side.panel.info.para.6.part2',
     defaultMessage: `
       on the map. These communities are also considered disadvantaged.
     `,
-    description: '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Federally Recognized Tribal lands are also highlighted on the map. These communities are also considered disadvantaged.',
+    description:
+      '`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Federally Recognized Tribal lands are also highlighted on the map. These communities are also considered disadvantaged.',
   },
 });
 
@@ -465,20 +524,22 @@ export const SIDE_PANEL_INIT_STATE_ICON_ALT_TEXT = defineMessages({
 });
 
 export const SIDE_PANEL_VERSION = {
-  TITLE: <FormattedMessage
-    id={'explore.map.page.side.panel.version.title'}
-    defaultMessage={ 'Methodology version {version}'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the methodology version number`}
-    values= {{
-      /**
-       * FormattedNumber currently renders 1.0 as 1. When the version number has a decimal point add back the
-       * Formatted Message component. Using toFixed will render the desire, however it returns a string which
-       * is unacceptable by the value prop of FormattedNumber.
-       */
-      // version: <FormattedNumber value={VERSION_NUMBER} style="decimal"/>,
-      version: VERSION_NUMBER,
-    }}
-  />,
+  TITLE: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.version.title'}
+      defaultMessage={'Methodology version {version}'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the methodology version number`}
+      values={{
+        /**
+         * FormattedNumber currently renders 1.0 as 1. When the version number has a decimal point add back the
+         * Formatted Message component. Using toFixed will render the desire, however it returns a string which
+         * is unacceptable by the value prop of FormattedNumber.
+         */
+        // version: <FormattedNumber value={VERSION_NUMBER} style="decimal"/>,
+        version: VERSION_NUMBER,
+      }}
+    />
+  ),
 };
 
 export const SIDE_PANEL_CBG_INFO = defineMessages({
@@ -515,86 +576,118 @@ export const SIDE_PANEL_CBG_INFO = defineMessages({
 });
 
 export const SIDE_PANEL_DEMOGRAPHICS = {
-  TITLE: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.title'}
-    defaultMessage={'Tract demographics'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demograhics title`}
-  />,
-  RACE_TITLE: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.race.title'}
-    defaultMessage={'Race / Ethnicity'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demograhics race title`}
-  />,
-  AGE_TITLE: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.age.title'}
-    defaultMessage={'Age'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demograhics age title`}
-  />,
-  DEMO_NON_HISPANIC_WHITE: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.white'}
-    defaultMessage={'White'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: White`}
-  />,
-  DEMO_BLACK: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.black'}
-    defaultMessage={'Black or African American'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Black`}
-  />,
-  DEMO_AMERICAN_INDIAN: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.american.indian'}
-    defaultMessage={'American Indian and Alaska Native'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: American Indian and Alaska Native`}
-  />,
-  DEMO_ASIAN: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.asian'}
-    defaultMessage={'Asian'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Asian`}
-  />,
-  DEMO_HAWAIIAN: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.hawaiian'}
-    defaultMessage={'Native Hawaiian or Pacific Islander'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Native Hawiian or Pacific Islander`}
-  />,
-  DEMO_OTHER_RACE: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.other'}
-    defaultMessage={'Other'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Other`}
-  />,
-  DEMO_TWO_OR_MORE_RACES: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.two.or.more'}
-    defaultMessage={'Two or more races'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Two or more races`}
-  />,
-  DEMO_HISPANIC: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.hispanic'}
-    defaultMessage={'Hispanic or Latino'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Hispanic or Latino`}
-  />,
-  DEMO_AGE_UNDER_10: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.age.under.10'}
-    defaultMessage={'Children under 10'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Children under 10`}
-  />,
-  DEMO_AGE_MID: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.of.age.mid'}
-    defaultMessage={'Ages 10 - 64'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Ages 10 - 64`}
-  />,
-  DEMO_AGE_OVER_65: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.age.over.65'}
-    defaultMessage={'Adults over 65'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Adults over 65`}
-  />,
-  SHOW_DEMOGRAPHICS: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.show'}
-    defaultMessage={'Show'}
-    description={`Show of show / hide accordian`}
-  />,
-  HIDE_DEMOGRAPHICS: <FormattedMessage
-    id={'explore.map.page.side.panel.demo.hide'}
-    defaultMessage={'Hide'}
-    description={`Hide of show / hide accordian`}
-  />,
+  TITLE: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.title'}
+      defaultMessage={'Tract demographics'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demograhics title`}
+    />
+  ),
+  RACE_TITLE: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.race.title'}
+      defaultMessage={'Race / Ethnicity'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demograhics race title`}
+    />
+  ),
+  AGE_TITLE: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.age.title'}
+      defaultMessage={'Age'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demograhics age title`}
+    />
+  ),
+  DEMO_NON_HISPANIC_WHITE: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.white'}
+      defaultMessage={'White'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: White`}
+    />
+  ),
+  DEMO_BLACK: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.black'}
+      defaultMessage={'Black or African American'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Black`}
+    />
+  ),
+  DEMO_AMERICAN_INDIAN: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.american.indian'}
+      defaultMessage={'American Indian and Alaska Native'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: American Indian and Alaska Native`}
+    />
+  ),
+  DEMO_ASIAN: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.asian'}
+      defaultMessage={'Asian'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Asian`}
+    />
+  ),
+  DEMO_HAWAIIAN: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.hawaiian'}
+      defaultMessage={'Native Hawaiian or Pacific Islander'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Native Hawiian or Pacific Islander`}
+    />
+  ),
+  DEMO_OTHER_RACE: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.other'}
+      defaultMessage={'Other'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Other`}
+    />
+  ),
+  DEMO_TWO_OR_MORE_RACES: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.two.or.more'}
+      defaultMessage={'Two or more races'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Two or more races`}
+    />
+  ),
+  DEMO_HISPANIC: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.hispanic'}
+      defaultMessage={'Hispanic or Latino'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Hispanic or Latino`}
+    />
+  ),
+  DEMO_AGE_UNDER_10: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.age.under.10'}
+      defaultMessage={'Children under 10'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Children under 10`}
+    />
+  ),
+  DEMO_AGE_MID: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.of.age.mid'}
+      defaultMessage={'Ages 10 - 64'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Ages 10 - 64`}
+    />
+  ),
+  DEMO_AGE_OVER_65: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.age.over.65'}
+      defaultMessage={'Adults over 65'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the demographics: Adults over 65`}
+    />
+  ),
+  SHOW_DEMOGRAPHICS: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.show'}
+      defaultMessage={'Show'}
+      description={`Show of show / hide accordian`}
+    />
+  ),
+  HIDE_DEMOGRAPHICS: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.demo.hide'}
+      defaultMessage={'Hide'}
+      description={`Hide of show / hide accordian`}
+    />
+  ),
 };
 
 export const SIDE_PANEL_TRIBAL_INFO = defineMessages({
@@ -607,77 +700,111 @@ export const SIDE_PANEL_TRIBAL_INFO = defineMessages({
 });
 
 export const PRIORITIZATION_COPY = {
-  NOT_PRIO: <FormattedMessage
-    id={'explore.map.page.side.panel.prio.copy.not.prio'}
-    defaultMessage={'This tract is not considered disadvantaged. It does not meet any burden thresholds <bold>OR</bold> at least one associated socioeconomic threshold.'}
-    description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It does not meet any burden thresholds OR at least one associated socioeconomic threshold.`}
-    values = {{
-      bold: boldFn,
-    }}
-  />,
-  NOT_PRIO_1BUR: <FormattedMessage
-    id={'explore.map.page.side.panel.prio.copy.not.prio.one.burden'}
-    defaultMessage={'This tract is not considered disadvantaged. It meets 1 burden threshold <bold>BUT</bold> no associated socioeconomic thresholds.'}
-    description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It meets [1] burden threshold <bold>BUT</bold> no associated socioeconomic thresholds.`}
-    values= {{
-      bold: boldFn,
-    }}
-  />,
-  NOT_PRIO_NBUR: <FormattedMessage
-    id={'explore.map.page.side.panel.prio.copy.not.prio.n.burden'}
-    defaultMessage={'This tract is not considered disadvantaged. It meets more than 1 burden threshold <bold>BUT</bold> no associated socioeconomic thresholds.'}
-    description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It meets more than 1 burden threshold <bold>BUT</bold> no associated socioeconomic thresholds.`}
-    values= {{
-      bold: boldFn,
-    }}
-  />,
-  NOT_PRIO_SURR_LI: <FormattedMessage
-    id={'explore.map.page.side.panel.prio.copy.not.prio.surr.li'}
-    defaultMessage={'This tract is not considered disadvantaged. It is surrounded by tracts that are disadvantaged <bold>BUT</bold> does not meet the adjusted low income threshold. The adjustment does not apply to any of the categories.'}
-    description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It is surrounded by tracts that are disadvantaged <bold>BUT</bold> does not meet the adjusted low income threshold.`}
-    values={{
-      bold: boldFn,
-    }}
-  />,
-  PAR_PRIO_SURR_NO_LI: <FormattedMessage
-    id={'explore.map.page.side.panel.prio.copy.par.prio.surr.no.li'}
-    defaultMessage={'This tract is partially disadvantaged. It is surrounded by tracts that are disadvantaged <bold>BUT</bold> does not meet the adjusted low income threshold. The adjustment does not apply to any of the categories.'}
-    description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It is surrounded by tracts that are disadvantaged <bold>BUT</bold> does not meet the adjusted low income threshold.`}
-    values={{
-      bold: boldFn,
-    }}
-  />,
-  PRIO_ISLAND_LI: <FormattedMessage
-    id={'explore.map.page.side.panel.prio.copy.prio.island.li'}
-    defaultMessage={'This tract is considered disadvantaged because it meets the low income threshold <bold>AND</bold> is in a U.S. Territory that is not included in each of the nationally-consistent datasets on environmental and climate burdens currently used in the tool.'}
-    description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is considered disadvantaged. It is an island territory that meets an adjusted low income threshold.`}
-    values={{
-      bold: boldFn,
-    }}
-  />,
-  PRIO_SURR_LI: <FormattedMessage
-    id={'explore.map.page.side.panel.prio.copy.prio.donut'}
-    defaultMessage={'This tract is considered disadvantaged. It is completely surrounded by tracts that are disadvantaged <bold>AND</bold> meets an adjusted low income threshold. The adjustment does not apply to any of the categories.'}
-    description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is considered disadvantaged. It is completely surrounded by tracts that are disadvantaged <bold>AND</bold> meets an adjusted low income threshold. The adjustment does not apply to any of the categories.`}
-    values={{
-      bold: boldFn,
-    }}
-  />,
-  PRIO_GRANDFATHERED_LI: <FormattedMessage
-    id={'explore.map.page.side.panel.prio.copy.prio.grandfathered'}
-    defaultMessage={'This tract is considered disadvantaged because it was identified as disadvantaged in version 1.0 of the tool.'}
-    description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is considered disadvantaged. This tract is considered disadvantaged because it was identified as disadvantaged in version 1.0 of the tool.`}
-    values={{
-      bold: boldFn,
-    }}
-  />,
+  NOT_PRIO: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.prio.copy.not.prio'}
+      defaultMessage={
+        'This tract is not considered disadvantaged. It does not meet any burden thresholds <bold>OR</bold> at least one associated socioeconomic threshold.'
+      }
+      description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It does not meet any burden thresholds OR at least one associated socioeconomic threshold.`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
+  NOT_PRIO_1BUR: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.prio.copy.not.prio.one.burden'}
+      defaultMessage={
+        'This tract is not considered disadvantaged. It meets 1 burden threshold <bold>BUT</bold> no associated socioeconomic thresholds.'
+      }
+      description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It meets [1] burden threshold <bold>BUT</bold> no associated socioeconomic thresholds.`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
+  NOT_PRIO_NBUR: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.prio.copy.not.prio.n.burden'}
+      defaultMessage={
+        'This tract is not considered disadvantaged. It meets more than 1 burden threshold <bold>BUT</bold> no associated socioeconomic thresholds.'
+      }
+      description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It meets more than 1 burden threshold <bold>BUT</bold> no associated socioeconomic thresholds.`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
+  NOT_PRIO_SURR_LI: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.prio.copy.not.prio.surr.li'}
+      defaultMessage={
+        'This tract is not considered disadvantaged. It is surrounded by tracts that are disadvantaged <bold>BUT</bold> does not meet the adjusted low income threshold. The adjustment does not apply to any of the categories.'
+      }
+      description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It is surrounded by tracts that are disadvantaged <bold>BUT</bold> does not meet the adjusted low income threshold.`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
+  PAR_PRIO_SURR_NO_LI: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.prio.copy.par.prio.surr.no.li'}
+      defaultMessage={
+        'This tract is partially disadvantaged. It is surrounded by tracts that are disadvantaged <bold>BUT</bold> does not meet the adjusted low income threshold. The adjustment does not apply to any of the categories.'
+      }
+      description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is not considered disadvantaged. It is surrounded by tracts that are disadvantaged <bold>BUT</bold> does not meet the adjusted low income threshold.`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
+  PRIO_ISLAND_LI: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.prio.copy.prio.island.li'}
+      defaultMessage={
+        'This tract is considered disadvantaged because it meets the low income threshold <bold>AND</bold> is in a U.S. Territory that is not included in each of the nationally-consistent datasets on environmental and climate burdens currently used in the tool.'
+      }
+      description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is considered disadvantaged. It is an island territory that meets an adjusted low income threshold.`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
+  PRIO_SURR_LI: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.prio.copy.prio.donut'}
+      defaultMessage={
+        'This tract is considered disadvantaged. It is completely surrounded by tracts that are disadvantaged <bold>AND</bold> meets an adjusted low income threshold. The adjustment does not apply to any of the categories.'
+      }
+      description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is considered disadvantaged. It is completely surrounded by tracts that are disadvantaged <bold>AND</bold> meets an adjusted low income threshold. The adjustment does not apply to any of the categories.`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
+  PRIO_GRANDFATHERED_LI: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.prio.copy.prio.grandfathered'}
+      defaultMessage={
+        'This tract is considered disadvantaged because it was identified as disadvantaged in version 1.0 of the tool.'
+      }
+      description={`Navigate to the explore the map page. Click on tract, The side panel will show This tract is considered disadvantaged. This tract is considered disadvantaged because it was identified as disadvantaged in version 1.0 of the tool.`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
 };
 
-export const getPrioNBurdenCopy = (burdens:string) => {
+export const getPrioNBurdenCopy = (burdens: string) => {
   return (
     <FormattedMessage
       id={'explore.map.page.side.panel.prio.copy.prio.n.burden'}
-      defaultMessage={ 'This tract is considered disadvantaged because it meets {burdens} burden threshold <bold>AND</bold> the associated socioeconomic threshold.'}
+      defaultMessage={
+        'This tract is considered disadvantaged because it meets {burdens} burden threshold <bold>AND</bold> the associated socioeconomic threshold.'
+      }
       description={`Navigate to the explore the map page. Click on tract, This tract is considered disadvantaged because it meets {burdens} burden thresholds <bold>AND</bold> the associated socioeconomic threshold.`}
       values={{
         burdens: burdens,
@@ -688,56 +815,71 @@ export const getPrioNBurdenCopy = (burdens:string) => {
 };
 
 // Copy around Federally recognized tribes
-export const getPrioFRTCopy = (amount:string, isAlso:boolean = false) => {
+export const getPrioFRTCopy = (amount: string, isAlso: boolean = false) => {
   return (
     <FormattedMessage
       id={'explore.map.page.side.panel.prio.copy.prio.frt'}
-      defaultMessage={ 'The lands of Federally Recognized Tribes that cover {amount} of this tract are {also} considered disadvantaged.'}
+      defaultMessage={
+        'The lands of Federally Recognized Tribes that cover {amount} of this tract are {also} considered disadvantaged.'
+      }
       description={`Navigate to the explore the map page. Click on tract, The lands of Federally Recognized Tribes that cover [#%] of this tract are considered disadvantaged.`}
       values={{
         amount: amount,
-        also: isAlso? 'also' : '',
+        also: isAlso ? 'also' : '',
       }}
     />
   );
 };
 
 // Copy around Federally recognized tribes points copy
-export const getPrioFRTPointsCopy = (numPoints:string, isAlso:boolean = false) => {
+export const getPrioFRTPointsCopy = (
+    numPoints: string,
+    isAlso: boolean = false,
+) => {
   return (
     <FormattedMessage
       id={'explore.map.page.side.panel.prio.copy.prio.frt.n.points'}
-      defaultMessage={ 'The {numPoints} that are Federally Recognized Tribes in this tract are are {also} considered disadvantaged.'}
+      defaultMessage={
+        'The {numPoints} that are Federally Recognized Tribes in this tract are are {also} considered disadvantaged.'
+      }
       description={`Navigate to the explore the map page. Click on tract, The {numPoints} that are Federally Recognized Tribes in this tract ares are {also} considered disadvantaged.`}
       values={{
         numPoints: numPoints,
-        also: isAlso? 'also' : '',
+        also: isAlso ? 'also' : '',
       }}
     />
   );
 };
 
 // Copy around Alaska Native Villages
-export const getPrioANVCopy = (numPoints:number, isAlso:boolean = false) => {
+export const getPrioANVCopy = (numPoints: number, isAlso: boolean = false) => {
   return (
     <FormattedMessage
       id={'explore.map.page.side.panel.prio.copy.prio.anv'}
-      defaultMessage={ 'The {numPoints} Alaska Native Villages in this tract that are Federally Recognized are {also} considered disadvantaged.'}
+      defaultMessage={
+        'The {numPoints} Alaska Native Villages in this tract that are Federally Recognized are {also} considered disadvantaged.'
+      }
       description={`Navigate to the explore the map page. Click on tract, The {numPoints} of this tract that are Federally Recognized Tribal lands are {also} considered disadvantaged.`}
       values={{
         numPoints: numPoints,
-        also: isAlso? 'also' : '',
+        also: isAlso ? 'also' : '',
       }}
     />
   );
 };
 
 // Copy around Alaska Native Villages points and US points
-export const getPrioAKUSCopy = (numAKpoints:number, numUSpoints:number, isAlso:boolean = false) => {
+export const getPrioAKUSCopy = (
+    numAKpoints: number,
+    numUSpoints: number,
+    isAlso: boolean = false,
+) => {
   return (
     <FormattedMessage
       id={'explore.map.page.side.panel.prio.copy.prio.akus'}
-      defaultMessage={ 'The {numAKpoints} Alaska Native Villages and the {numUSpoints} tribes in this tract that are Federally Recognized are {also} considered disadvantaged.'}
+      defaultMessage={
+        'The {numAKpoints} Alaska Native Villages and the {numUSpoints} tribes in this tract that are Federally Recognized are {also} considered disadvantaged.'
+      }
       description={`Navigate to the explore the map page. Click on tract, The {numAKpoints} Alaska Native Villages and the {numUSpoints} tribes in this tract that are Federally Recognized are considered disadvantaged.`}
       values={{
         numAKpoints: numAKpoints,
@@ -749,11 +891,16 @@ export const getPrioAKUSCopy = (numAKpoints:number, numUSpoints:number, isAlso:b
 };
 
 // Copy percentile of track in FRT and number of points in FRT with "also"
-export const getPrioPercAndNumPointsAlsoCopy = (amount:string, numPoints:number) => {
+export const getPrioPercAndNumPointsAlsoCopy = (
+    amount: string,
+    numPoints: number,
+) => {
   return (
     <FormattedMessage
       id={'explore.map.page.side.panel.prio.copy.prio.perc.num.points'}
-      defaultMessage={ 'The lands of Federally Recognized Tribes that cover {amount} of this tract and the {numPoints} tribes that are Federally Recognized are also considered disadvantaged.'}
+      defaultMessage={
+        'The lands of Federally Recognized Tribes that cover {amount} of this tract and the {numPoints} tribes that are Federally Recognized are also considered disadvantaged.'
+      }
       description={`Navigate to the explore the map page. Click on tract, The Federally Recognized Tribal lands that cover {amount} of this tract and the {numPoints} tribes that are Federally Recognized are also considered disadvantaged.`}
       values={{
         amount: amount,
@@ -783,32 +930,42 @@ export const ISLAND_COPY = defineMessages({
   },
 });
 export const COMMUNITY = {
-  OF_FOCUS: <FormattedMessage
-    id={'explore.map.page.side.panel.community.of.focus'}
-    defaultMessage={ 'YES'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the communities the score currently is focused on`}
-  />,
-  NOT_OF_FOCUS: <FormattedMessage
-    id= {'explore.map.page.side.panel.not.community.of.focus'}
-    defaultMessage= {'NO'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the communities the score currently is not focused on`}
-  />,
-  PARTIAL: <FormattedMessage
-    id= {'explore.map.page.side.panel.partial.community.of.focus'}
-    defaultMessage= {'PARTIALLY'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the communities the score currently is partially focused on`}
-  />,
-  IS_FOCUS: <FormattedMessage
-    id={'explore.map.page.side.panel.is.community.of.focus'}
-    defaultMessage={ 'Identified as disadvantaged?'}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show asking IF the communities is focused on`}
-  />,
+  OF_FOCUS: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.community.of.focus'}
+      defaultMessage={'YES'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the communities the score currently is focused on`}
+    />
+  ),
+  NOT_OF_FOCUS: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.not.community.of.focus'}
+      defaultMessage={'NO'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the communities the score currently is not focused on`}
+    />
+  ),
+  PARTIAL: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.partial.community.of.focus'}
+      defaultMessage={'PARTIALLY'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the communities the score currently is partially focused on`}
+    />
+  ),
+  IS_FOCUS: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.is.community.of.focus'}
+      defaultMessage={'Identified as disadvantaged?'}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show asking IF the communities is focused on`}
+    />
+  ),
   SEND_FEEDBACK: {
-    TITLE: <FormattedMessage
-      id={'explore.map.page.side.panel.send.feedback.title'}
-      defaultMessage={ 'Send feedback'}
-      description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show link to send feedback`}
-    />,
+    TITLE: (
+      <FormattedMessage
+        id={'explore.map.page.side.panel.send.feedback.title'}
+        defaultMessage={'Send feedback'}
+        description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show link to send feedback`}
+      />
+    ),
     IMG_ICON: defineMessages({
       ALT_TAG: {
         id: 'explore.map.page.side.panel.send.feedback.alt.img',
@@ -819,14 +976,16 @@ export const COMMUNITY = {
   },
 };
 
-export const numberOfCategoriesExceeded = (categoryCount:number) => <FormattedMessage
-  id={'explore.map.page.side.panel.num.categories.exceeded'}
-  defaultMessage={`in {numberOfDisCategories, plural, one {# category} other {# categories}}`}
-  description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show how many categories are exceeded`}
-  values={{
-    numberOfDisCategories: categoryCount,
-  }}
-/>;
+export const numberOfCategoriesExceeded = (categoryCount: number) => (
+  <FormattedMessage
+    id={'explore.map.page.side.panel.num.categories.exceeded'}
+    defaultMessage={`in {numberOfDisCategories, plural, one {# category} other {# categories}}`}
+    description={`Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show how many categories are exceeded`}
+    values={{
+      numberOfDisCategories: categoryCount,
+    }}
+  />
+);
 
 // Temporarily commenting out as it may be needed again:
 // export const numberOfThresholdsExceeded = (thresholds:number) => <FormattedMessage
@@ -947,7 +1106,8 @@ export const SIDE_PANEL_INDICATORS = defineMessages({
   LOW_INCOME: {
     id: 'explore.map.page.side.panel.indicator.low.income',
     defaultMessage: 'Low income',
-    description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show low income`},
+    description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show low income`,
+  },
   HIGH_ED: {
     id: 'explore.map.page.side.panel.indicator.high.ed',
     defaultMessage: 'Higher education non-enrollment',
@@ -1114,30 +1274,37 @@ export const SIDE_PANEL_INDICATORS = defineMessages({
     defaultMessage: 'Impute flag',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show Impute flag`,
   },
-
 });
 
 export const SIDE_PANEL_VALUES = {
-  ABOVE: <FormattedMessage
-    id={'explore.map.page.side.panel.indicator.value.subtext.above'}
-    description={'indicating above threshold'}
-    defaultMessage={`above `}
-  />,
-  BELOW: <FormattedMessage
-    id={'explore.map.page.side.panel.indicator.value.subtext.below'}
-    description={'indicating below threshold'}
-    defaultMessage={`not above `}
-  />,
-  PERCENT: <FormattedMessage
-    id={'explore.map.page.side.panel.indicator.value.subtext.percent'}
-    description={'indicating percent units'}
-    defaultMessage={`percent`}
-  />,
-  PERCENTILE: <FormattedMessage
-    id={'explore.map.page.side.panel.indicator.value.subtext.percentile'}
-    description={'indicating percentile units'}
-    defaultMessage={`percentile`}
-  />,
+  ABOVE: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.indicator.value.subtext.above'}
+      description={'indicating above threshold'}
+      defaultMessage={`above `}
+    />
+  ),
+  BELOW: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.indicator.value.subtext.below'}
+      description={'indicating below threshold'}
+      defaultMessage={`not above `}
+    />
+  ),
+  PERCENT: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.indicator.value.subtext.percent'}
+      description={'indicating percent units'}
+      defaultMessage={`percent`}
+    />
+  ),
+  PERCENTILE: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.indicator.value.subtext.percentile'}
+      description={'indicating percentile units'}
+      defaultMessage={`percentile`}
+    />
+  ),
   IMG_ALT_TEXT: defineMessages({
     ARROW_UP: {
       id: 'explore.map.page.side.panel.indicator.value.arrow.up.alt.text',
@@ -1155,24 +1322,28 @@ export const SIDE_PANEL_VALUES = {
       defaultMessage: `an icon to represent data is unavailable`,
     },
   }),
-  UNAVAILBLE_MSG: <FormattedMessage
-    id={'explore.map.page.side.panel.indicator.value.subtext.unavailable'}
-    description={'subtext for indicator when data is N/A'}
-    defaultMessage={`missing data`}
-  />,
+  UNAVAILBLE_MSG: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.indicator.value.subtext.unavailable'}
+      description={'subtext for indicator when data is N/A'}
+      defaultMessage={`missing data`}
+    />
+  ),
 };
 
 export const SIDE_PANEL_INDICATOR_DESCRIPTION = defineMessages({
   // Climate change
   EXP_AG_LOSS: {
     id: 'explore.map.page.side.panel.indicator.description.exp.ag.loss',
-    defaultMessage: 'Economic loss to agricultural value resulting from natural hazards each year',
+    defaultMessage:
+      'Economic loss to agricultural value resulting from natural hazards each year',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show an indicator description of Economic loss rate to agriculture resulting from natural hazards
     `,
   },
   EXP_BLD_LOSS: {
     id: 'explore.map.page.side.panel.indicator.description.exp.bld.loss',
-    defaultMessage: 'Economic loss to building value resulting from natural hazards each year',
+    defaultMessage:
+      'Economic loss to building value resulting from natural hazards each year',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side
     panel will show an indicator description of Economic loss rate to buildings resulting from natural hazards`,
   },
@@ -1254,7 +1425,8 @@ export const SIDE_PANEL_INDICATOR_DESCRIPTION = defineMessages({
   // Housing
   HIST_UNDERINVEST: {
     id: 'explore.map.page.side.panel.indicator.description.historic.underinvestment',
-    defaultMessage: 'Census tracts with historically high barriers to accessing home loans',
+    defaultMessage:
+      'Census tracts with historically high barriers to accessing home loans',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show an indicator description of Census tracts with historically high barriers to accessing home loans`,
   },
   HOUSE_COST: {
@@ -1265,7 +1437,8 @@ export const SIDE_PANEL_INDICATOR_DESCRIPTION = defineMessages({
   },
   LACK_GREEN_SPACE: {
     id: 'explore.map.page.side.panel.indicator.description.lack.green.space',
-    defaultMessage: 'Amount of land, not including crop land, that is covered with artificial materials like concrete or pavement',
+    defaultMessage:
+      'Amount of land, not including crop land, that is covered with artificial materials like concrete or pavement',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show an indicator description Share of non-crop land covered with artificial materials like concrete or pavement`,
   },
   LACK_PLUMBING: {
@@ -1285,12 +1458,14 @@ export const SIDE_PANEL_INDICATOR_DESCRIPTION = defineMessages({
   // Legacy Pollution
   ABANDON_MINES: {
     id: 'explore.map.page.side.panel.indicator.description.abandon.mines',
-    defaultMessage: 'Presence of one or more abandoned mine land within the tract',
+    defaultMessage:
+      'Presence of one or more abandoned mine land within the tract',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show an indicator description of Presence of an abandoned mine lands within the tract`,
   },
   FORMER_DEF_SITES: {
     id: 'explore.map.page.side.panel.indicator.description.former.def.sites',
-    defaultMessage: 'Presence of one or more Formerly Used Defense Site within the tract',
+    defaultMessage:
+      'Presence of one or more Formerly Used Defense Site within the tract',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show an indicator description of Presence of a Formerly Used Defense Site within the tract`,
   },
   PROX_HAZ: {
@@ -1300,7 +1475,8 @@ export const SIDE_PANEL_INDICATOR_DESCRIPTION = defineMessages({
   },
   PROX_RMP: {
     id: 'explore.map.page.side.panel.indicator.description.prox.rmp',
-    defaultMessage: 'Count of Risk Management Plan (RMP) facilities within 5 kilometers',
+    defaultMessage:
+      'Count of Risk Management Plan (RMP) facilities within 5 kilometers',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show an indicator description of Count of Risk Management Plan facilities within 5 kilometers`,
   },
   PROX_NPL: {
@@ -1335,10 +1511,10 @@ export const SIDE_PANEL_INDICATOR_DESCRIPTION = defineMessages({
   },
   WASTE_WATER: {
     id: 'explore.map.page.side.panel.indicator.description.wasteWater',
-    defaultMessage: 'Modeled toxic concentrations at parts of streams within 500 meters',
+    defaultMessage:
+      'Modeled toxic concentrations at parts of streams within 500 meters',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show an indicator description of Modeled toxic concentrations at parts of streams within 500 meters`,
   },
-
 
   // Workforce development
   LING_ISO: {
@@ -1350,7 +1526,8 @@ export const SIDE_PANEL_INDICATOR_DESCRIPTION = defineMessages({
   },
   LOW_MED_INCOME: {
     id: 'explore.map.page.side.panel.indicator.description.low.med.income',
-    defaultMessage: 'Comparison of median income in the tract to median incomes in the area',
+    defaultMessage:
+      'Comparison of median income in the tract to median incomes in the area',
     description: `Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show an indicator description of Comparison of median income in the tract to median incomes in the area`,
   },
   POVERTY: {
@@ -1376,134 +1553,183 @@ export const SIDE_PANEL_INDICATOR_DESCRIPTION = defineMessages({
 });
 
 export const SIDE_PANEL_SPACERS = {
-  EXCEED_ONE_OR_MORE: <FormattedMessage
-    id={'explore.map.page.side.panel.at.or.above.at.least.one'}
-    defaultMessage={`At or above at least one threshold?`}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. Click on a category to expand. This is the first question text around thresholds.`}
-  />,
-  EXCEED_BOTH_SOCIO: <FormattedMessage
-    id={'explore.map.page.side.panel.at.or.above.both.thresholds'}
-    defaultMessage={`At or above both associated thresholds?`}
-    description={`Navigate to the explore the map page. When the map is in view, click on the map. Click on a category to expand. This is the second question text around thresholds.`}
-  />,
-  YES: <FormattedMessage
-    id={'explore.map.page.side.panel.exceed.burden.answer.yes'}
-    defaultMessage={`Yes`}
-    description={'Navigate to the explore the map page. When the map is in view, click on the map. This will display YES if the census tract is disadvantaged'}
-  />,
-  NO: <FormattedMessage
-    id={'explore.map.page.side.panel.exceed.burden.answer.no'}
-    defaultMessage={`No`}
-    description={'Navigate to the explore the map page. When the map is in view, click on the map. This will display NO if the census tract is disadvantaged'}
-  />,
-  AND: <FormattedMessage
-    id={'explore.map.page.side.panel.spacer.and'}
-    defaultMessage={`AND`}
-    description={'Navigate to the explore the map page. When the map is in view, click on the map. Click on a category to expand. This is the AND spacer around thresholds.'}
-  />,
+  EXCEED_ONE_OR_MORE: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.at.or.above.at.least.one'}
+      defaultMessage={`At or above at least one threshold?`}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. Click on a category to expand. This is the first question text around thresholds.`}
+    />
+  ),
+  EXCEED_BOTH_SOCIO: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.at.or.above.both.thresholds'}
+      defaultMessage={`At or above both associated thresholds?`}
+      description={`Navigate to the explore the map page. When the map is in view, click on the map. Click on a category to expand. This is the second question text around thresholds.`}
+    />
+  ),
+  YES: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.exceed.burden.answer.yes'}
+      defaultMessage={`Yes`}
+      description={
+        'Navigate to the explore the map page. When the map is in view, click on the map. This will display YES if the census tract is disadvantaged'
+      }
+    />
+  ),
+  NO: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.exceed.burden.answer.no'}
+      defaultMessage={`No`}
+      description={
+        'Navigate to the explore the map page. When the map is in view, click on the map. This will display NO if the census tract is disadvantaged'
+      }
+    />
+  ),
+  AND: (
+    <FormattedMessage
+      id={'explore.map.page.side.panel.spacer.and'}
+      defaultMessage={`AND`}
+      description={
+        'Navigate to the explore the map page. When the map is in view, click on the map. Click on a category to expand. This is the AND spacer around thresholds.'
+      }
+    />
+  ),
 };
 
 export const LOW_INCOME_TOOLTIP = defineMessages({
   IMP_YES_POP_NULL: {
     id: 'explore.map.page.side.panel.indicator.low.income.tooltip.IMP_YES_POP_NULL',
     defaultMessage: `Income is not estimated for<br /> tracts with unknown populations.`,
-    description: 'Hover over the low income icon and it will show Income is not estimated for<br /> tracts with unknown populations.',
+    description:
+      'Hover over the low income icon and it will show Income is not estimated for<br /> tracts with unknown populations.',
   },
   IMP_YES_POP_NOT_NULL: {
     id: 'explore.map.page.side.panel.indicator.low.income.tooltip.IMP_YES_POP_NOT_NULL',
     defaultMessage: `Tracts with known populations<br />that are missing income data<br />are given estimated incomes based<br />on an average of the incomes<br />in the surrounding tracts.`,
-    description: 'Hover over the low income icon and it will show Tracts with missing income data are given estimated incomes based on an average of the incomes of the surrounding tracts.',
+    description:
+      'Hover over the low income icon and it will show Tracts with missing income data are given estimated incomes based on an average of the incomes of the surrounding tracts.',
   },
 });
 
-
 export const DOWNLOAD_DRAFT = {
-  PARAGRAPH_1: <FormattedMessage
-    id={'explore.map.page.under.map.download.draft.ptag.1'}
-    defaultMessage={`
+  PARAGRAPH_1: (
+    <FormattedMessage
+      id={'explore.map.page.under.map.download.draft.ptag.1'}
+      defaultMessage={`
       <link1>Download the data sources</link1> used in the CEJST (.csv, .xlxs, .pdf that describes how to use the list, and a codebook, {downloadFileSize} unzipped). Last updated: {dateUpdated}.
     `}
-    description={`
+      description={`
       Navigate to the explore the map page. Under the map, you will see a link that is placed below the
       map that will download the data packet
     `}
-    values={{
-      link1: downloadLink(DOWNLOAD_FILES.NARWAL.SHAPE_FILE.URL),
-      downloadFileSize: <FormattedNumber
-        value={DOWNLOAD_FILES.NARWAL.SHAPE_FILE.SIZE}
-        style="unit"
-        unit="megabyte"
-        unitDisplay="narrow"
-      />,
-      dateUpdated: <FormattedDate
-        value={DOWNLOAD_FILES.NARWAL.SHAPE_FILE.LAST_UPDATED}
-        year="2-digit"
-        month="2-digit"
-        day="2-digit"
-      />,
-    }}
-  />,
+      values={{
+        link1: downloadLink(DOWNLOAD_FILES.NARWAL.SHAPE_FILE.URL),
+        downloadFileSize: (
+          <FormattedNumber
+            value={DOWNLOAD_FILES.NARWAL.SHAPE_FILE.SIZE}
+            style="unit"
+            unit="megabyte"
+            unitDisplay="narrow"
+          />
+        ),
+        dateUpdated: (
+          <FormattedDate
+            value={DOWNLOAD_FILES.NARWAL.SHAPE_FILE.LAST_UPDATED}
+            year="2-digit"
+            month="2-digit"
+            day="2-digit"
+          />
+        ),
+      }}
+    />
+  ),
 };
 
 export const NOTE_ON_TERRITORIES = {
-  INTRO: <FormattedMessage
-    id={'explore.map.page.under.map.note.on.territories.intro'}
-    defaultMessage={`U.S. Territories note`}
-    description={`Navigate to the explore the map page. Under the map, you will see territories intro text`}
-  />,
-  PARA_0: <FormattedMessage
-    id={'explore.map.page.under.map.note.on.territories.para.0'}
-    defaultMessage={`
+  INTRO: (
+    <FormattedMessage
+      id={'explore.map.page.under.map.note.on.territories.intro'}
+      defaultMessage={`U.S. Territories note`}
+      description={`Navigate to the explore the map page. Under the map, you will see territories intro text`}
+    />
+  ),
+  PARA_0: (
+    <FormattedMessage
+      id={'explore.map.page.under.map.note.on.territories.para.0'}
+      defaultMessage={`
       Not all the data used in the tool are available or used for all U.S. Territories, and there is one dataset not used in Puerto Rico.
     `}
-    description={`Navigate to the explore the map page. Under the map, you will see territories paragraph 0`}
-  />,
-  PARA_1: <FormattedMessage
-    id={'explore.map.page.under.map.note.on.territories.para.1'}
-    defaultMessage={`
+      description={`Navigate to the explore the map page. Under the map, you will see territories paragraph 0`}
+    />
+  ),
+  PARA_1: (
+    <FormattedMessage
+      id={'explore.map.page.under.map.note.on.territories.para.1'}
+      defaultMessage={`
       <bold>Puerto Rico:</bold> The data used for Puerto Rico are from all relevant and available fields in the energy, housing, legacy pollution, transportation, and workforce development categories. The following data are used: low income, projected flood risk, energy cost, lack of indoor plumbing, lead paint, housing cost, proximity to hazardous waste facilities, proximity to Superfund or National Priorities List (NPL) sites, proximity to Risk Management Plan (RMP) facilities, diesel particulate matter exposure, traffic proximity and volume, underground storage tanks and releases, wastewater discharge, low median income, poverty, unemployment, and high school education. Linguistic isolation was removed for Puerto Rico based on feedback received during the beta period.
     `}
-    description={`Navigate to the explore the map page. Under the map, you will see territories paragraph 1`}
-    values={{
-      bold: boldFn,
-    }}
-  />,
+      description={`Navigate to the explore the map page. Under the map, you will see territories paragraph 1`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
 
-  PARA_2: <FormattedMessage
-    id={'explore.map.page.under.map.note.on.territories.para.2'}
-    defaultMessage={`
+  PARA_2: (
+    <FormattedMessage
+      id={'explore.map.page.under.map.note.on.territories.para.2'}
+      defaultMessage={`
     <bold>American Samoa, Guam, the Northern Mariana Islands, and the U.S. Virgin Islands:</bold> For these U.S. Territories, the tool uses the following data: low income, unemployment, poverty, low median income, and high school education. These burdens are in the workforce development category. Due to limited data availability, tracts in these U.S. Territories are also considered disadvantaged if they meet the low income threshold only.
   `}
-    description={`Navigate to the explore the map page. Under the map, you will see territories paragraph 2`}
-    values={{
-      bold: boldFn,
-    }}
-  />,
+      description={`Navigate to the explore the map page. Under the map, you will see territories paragraph 2`}
+      values={{
+        bold: boldFn,
+      }}
+    />
+  ),
 };
 
 export const NOTE_ON_TRIBAL_NATIONS = {
-  INTRO: <FormattedMessage
-    id={'explore.map.page.under.map.note.on.tribal.nations.intro'}
-    defaultMessage={`Tribal Nations note`}
-    description={`Navigate to the explore the map page. Under the map, you will see tribal nations intro text`}
-  />,
-  PARA_1: <FormattedMessage
-    id={'explore.map.page.under.map.note.on.tribal.nations.para.1'}
-    defaultMessage={`
-      To respect Tribal sovereignty and self-government and to fulfill Federal trust and treaty responsibilities to Tribal Nations, land within the boundaries of Federally Recognized Tribes are designated as disadvantaged on the map. Alaska Native Villages are included as point locations that are smaller than a census tract. The boundaries of census tracts and the lands of Federally Recognized Tribes are different.
+  INTRO: (
+    <FormattedMessage
+      id={'explore.map.page.under.map.note.on.tribal.nations.intro'}
+      defaultMessage={`Tribal Nations note`}
+      description={`Navigate to the explore the map page. Under the map, you will see tribal nations intro text`}
+    />
+  ),
+  PARA_1: (
+    <FormattedMessage
+      id={'explore.map.page.under.map.note.on.tribal.nations.para.1'}
+      defaultMessage={`
+      To respect Tribal sovereignty and self-government and to fulfill Federal trust and treaty responsibilities to Tribal Nations, land within the boundaries of Federally Recognized Tribes are designated as disadvantaged. The boundaries of census tracts and the lands of Federally Recognized Tribes are different.
     `}
-    description={`Navigate to the explore the map page. Under the map, you will see tribal nations paragraph 1`}
-  />,
-  PARA_2: <FormattedMessage
-    id={'explore.map.page.under.map.note.on.tribal.nations.para.2'}
-    defaultMessage={`
+      description={`Navigate to the explore the map page. Under the map, you will see tribal nations paragraph 1`}
+    />
+  ),
+  PARA_2: (
+    <FormattedMessage
+      id={'explore.map.page.under.map.note.on.tribal.nations.para.2'}
+      defaultMessage={`
       This decision was made after meaningful and robust consultation with Tribal Nations. This is consistent with CEQ’s <link1>Action Plan</link1> for Consultation and Coordination with Tribal Nations, the <link3>Memorandum</link3> on Tribal Consultation and Strengthening Nation-to-Nation Consultation, and <link2>Executive Order 13175</link2> on Consultation and Coordination With Indian Tribal Governments.
     `}
-    description={`Navigate to the explore the map page. Under the map, you will see tribal nations paragraph 2`}
-    values={{
-      link1: linkFn(EXPLORE_PAGE_LINKS.WH_GOV_TRIBAL_ACTION_PLAN_4_26_21, false, true),
-      link2: linkFn(EXPLORE_PAGE_LINKS.FED_REGISTER_CONSULT_TRIBE_GOV_2000, false, true),
-      link3: linkFn(EXPLORE_PAGE_LINKS.WH_GOV_TRIBAL_CONSULT_NATION_NATION_01_25_21, false, true),
-    }}
-  />,
+      description={`Navigate to the explore the map page. Under the map, you will see tribal nations paragraph 2`}
+      values={{
+        link1: linkFn(
+            EXPLORE_PAGE_LINKS.WH_GOV_TRIBAL_ACTION_PLAN_4_26_21,
+            false,
+            true,
+        ),
+        link2: linkFn(
+            EXPLORE_PAGE_LINKS.FED_REGISTER_CONSULT_TRIBE_GOV_2000,
+            false,
+            true,
+        ),
+        link3: linkFn(
+            EXPLORE_PAGE_LINKS.WH_GOV_TRIBAL_CONSULT_NATION_NATION_01_25_21,
+            false,
+            true,
+        ),
+      }}
+    />
+  ),
 };

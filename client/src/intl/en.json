@@ -172,11 +172,11 @@
     "description": "Navigate to the about page. This is Header navigate item to the about page"
   },
   "common.pages.header.contact": {
-    "defaultMessage": "Contact",
+    "defaultMessage": "Contact & Acknowledgements",
     "description": "Navigate to the about page. This is Header navigate item to the Contact page"
   },
   "common.pages.header.downloads": {
-    "defaultMessage": "Downloads",
+    "defaultMessage": "User Guide",
     "description": "Navigate to the about page. This is Header navigate item to the downloads page"
   },
   "common.pages.header.explore": {
@@ -188,7 +188,7 @@
     "description": "Navigate to the about page. This is Header navigate item to the faqs page"
   },
   "common.pages.header.methodology": {
-    "defaultMessage": "Methodology & data",
+    "defaultMessage": "Methodology & Data",
     "description": "Navigate to the about page. This is Header navigate item to the Methodology page"
   },
   "common.pages.header.previous_versions": {
@@ -200,7 +200,7 @@
     "description": "Navigate to the about page. This is Header navigate item to the public eng page"
   },
   "common.pages.header.title.line1": {
-    "defaultMessage": "MEDS Justice40",
+    "defaultMessage": "Climate and Economic Justice Screening Tool+",
     "description": "Navigate to the about page. This is Title in nav header"
   },
   "common.pages.header.tsd": {
@@ -344,11 +344,11 @@
     "description": "Navigate to the Downloads page, this will be the view of change log"
   },
   "explore.map.page.description.1": {
-    "defaultMessage": "Census tracts that are marginalized by underinvestment and overburdened by pollution are highlighted as being disadvantaged on the map. Federally Recognized Tribes, including Alaska Native Villages, are considered disadvantaged communities, whether or not they have land.",
+    "defaultMessage": "Welcome to the CEJST+ tool. This tool is a reimagining of the <link1>Climate and Economic Justice Screening Tool</link1> created as part of the <link2>Justice 40 initiative</link2> in 2021. The original exploration of disadvantaged status has been expanded to include two new layers: <bold>cumulative</bold> and <bold>hotspot</bold>. The cumulative layer shows total exceeded threshold counts for burdens and indicators. The hotspot layer visualizes clusters of unusally high or low thresholds exceeded as hot or cold spots. The legacy layer shows the original CEJST tool. For more information on the new layers, please see the methodology tab.",
     "description": "On the explore the map page, the first description of the page"
   },
   "explore.map.page.description.2": {
-    "defaultMessage": "Zooming in and selecting shows information about each census tract.",
+    "defaultMessage": "More information, including demographics and thresholds exceeded, can be found by zooming in and selecting a census tract.",
     "description": "On the explore the map page, the fifth description of the page"
   },
   "explore.map.page.explore.data.box.body": {
@@ -1184,7 +1184,7 @@
     "description": "Navigate to the explore the map page. When the map is in view, click on the map. The side panel will show the methodology version number"
   },
   "explore.map.page.title.text": {
-    "defaultMessage": "Explore the map with MEDS Justice40",
+    "defaultMessage": "MEDS Justice40",
     "description": "On the explore the map page, the title of the page"
   },
   "explore.map.page.under.map.download.draft.ptag.1": {
@@ -1212,7 +1212,7 @@
     "description": "Navigate to the explore the map page. Under the map, you will see tribal nations intro text"
   },
   "explore.map.page.under.map.note.on.tribal.nations.para.1": {
-    "defaultMessage": "To respect Tribal sovereignty and self-government and to fulfill Federal trust and treaty responsibilities to Tribal Nations, land within the boundaries of Federally Recognized Tribes are designated as disadvantaged on the map. Alaska Native Villages are included as point locations that are smaller than a census tract. The boundaries of census tracts and the lands of Federally Recognized Tribes are different.",
+    "defaultMessage": "To respect Tribal sovereignty and self-government and to fulfill Federal trust and treaty responsibilities to Tribal Nations, land within the boundaries of Federally Recognized Tribes are designated as disadvantaged. The boundaries of census tracts and the lands of Federally Recognized Tribes are different.",
     "description": "Navigate to the explore the map page. Under the map, you will see tribal nations paragraph 1"
   },
   "explore.map.page.under.map.note.on.tribal.nations.para.2": {

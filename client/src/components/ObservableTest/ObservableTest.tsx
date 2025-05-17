@@ -2,14 +2,59 @@ import React, {useState, useEffect} from 'react';
 import * as Plot from '@observablehq/plot';
 import * as d3 from 'd3';
 
-const ObservableTest = () => {
+interface Props {
+  url: string;
+}
+// import {useFlags} from '../../contexts/FlagContext';
+
+// export const featureURLForTilesetName = (
+//     tilesetType: string,
+//     // tilesetSubtype: string,
+//     tilesetName: string,
+// ): string => {
+//   const flags = useFlags();
+
+//   const pipelineStagingBaseURL =
+//     process.env.GATSBY_CDN_TILES_BASE_URL + `/data-pipeline-staging`;
+//   const XYZ_SUFFIX = '{z}/{x}/{y}.pbf';
+
+//   if ('stage_hash' in flags) {
+//     const regex = /^[0-9]{4}\/[a-f0-9]{40}$/;
+//     if (!regex.test(flags['stage_hash'])) {
+//       console.error(COMMON_COPY.CONSOLE_ERROR.STAGE_URL);
+//     }
+
+//     return `${pipelineStagingBaseURL}/${flags['stage_hash']}/data/score/tiles/${tilesetName}/${XYZ_SUFFIX}`;
+//   } else {
+//     const featureTileBaseURL = constants.TILE_BASE_URL;
+//     const featureTilePath = constants.TILE_PATH;
+//     const mapTilesPath = process.env.GATSBY_MAP_TILES_PATH;
+
+//     const pathParts = [
+//       featureTileBaseURL,
+//       featureTilePath,
+//       mapTilesPath,
+//       tilesetType,
+//       // tilesetSubtype,
+//       tilesetName,
+//       XYZ_SUFFIX,
+//     ]
+//         .filter(Boolean)
+//         .map((part) => part.replace(/^\/|\/$/g, '')) // trim leading/trailing slashes
+//         .join('/');
+
+//     return pathParts.startsWith('http') ? pathParts : `/${pathParts}`;
+//   }
+// };
+
+const ObservableTest = ({url}: Props) => {
   const [data, setData] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Fetch the data
-    const url =
-      'http://localhost:5001/data/data-pipeline/data_pipeline/data/score/geojson/burd_dem_long.json';
+    // const url =
+    //   'http://localhost:5001/data/data-pipeline/data_pipeline/data/score/geojson/burd_dem_long.json';
     console.log('Fetching data from:', url);
 
     fetch(url)
@@ -87,7 +132,7 @@ const ObservableTest = () => {
           }),
         ],
         y: {axis: true, label: 'Percentage'},
-        x: {label: 'Total Burdens'},
+        x: {label: 'Burden Thresholds Exceeded'},
         color: {
           range: colorPalette,
           legend: true,
@@ -98,7 +143,7 @@ const ObservableTest = () => {
         marginTop: 30,
         style: {
           fontFamily: 'Lexend, sans-serif',
-          fontSize: '14px',
+          fontSize: '16px',
         },
       });
 

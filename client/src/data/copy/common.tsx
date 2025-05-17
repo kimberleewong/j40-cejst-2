@@ -163,7 +163,7 @@ export const ALERTS = {
 export const HEADER = defineMessages({
   TITLE_LINE_1: {
     id: 'common.pages.header.title.line1',
-    defaultMessage: `MEDS Justice40`,
+    defaultMessage: `Climate and Economic Justice Screening Tool+`,
     description: 'Navigate to the about page. This is Title in nav header',
   },
   ABOUT: {
@@ -180,19 +180,19 @@ export const HEADER = defineMessages({
   },
   METHODOLOGY: {
     id: 'common.pages.header.methodology',
-    defaultMessage: 'Methodology & data',
+    defaultMessage: 'Methodology & Data',
     description:
       'Navigate to the about page. This is Header navigate item to the Methodology page',
   },
   CONTACT: {
     id: 'common.pages.header.contact',
-    defaultMessage: 'Contact',
+    defaultMessage: 'Contact & Acknowledgements',
     description:
       'Navigate to the about page. This is Header navigate item to the Contact page',
   },
   DOWNLOADS: {
     id: 'common.pages.header.downloads',
-    defaultMessage: 'Downloads',
+    defaultMessage: 'User Guide',
     description:
       'Navigate to the about page. This is Header navigate item to the downloads page',
   },

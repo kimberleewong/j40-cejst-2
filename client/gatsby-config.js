@@ -46,6 +46,7 @@ module.exports = {
         defaultLanguage: `en`,
         // option to redirect to `/en` when connecting `/`
         redirect: true,
+        exludePages: [`/escontact`],
       },
     },
     {

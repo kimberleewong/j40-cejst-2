@@ -161,6 +161,14 @@ li.usa-nav__primary-item a:hover::after {
   @include u-border-y('blue-cool-5');
 }
 
+.j40-main-grid-green-bk {
+  @include u-bg('green-cool-5');
+// avoid margin collapse
+  @include u-border-y(1px);
+  @include u-border-y('solid');
+  @include u-border-y('blue-cool-5');
+}
+
 #main-content {
   border-top: 0; // The main content has border this removes it
   min-height: 60vh; // Contact page's content is not enough to fill page so this keeps the footer low
